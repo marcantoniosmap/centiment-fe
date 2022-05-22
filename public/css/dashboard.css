@@ -1,0 +1,113 @@
+.dashboardContainer{
+
+}
+
+.dashboardCardHeader{
+
+}
+
+
+.dashboardCard{
+    padding : 0.5rem 1rem 1rem 1rem ;
+    height: 100%;
+    width: 100%;
+    background-color: white;
+    border-radius: 10px;
+    filter: drop-shadow(0px 3px 6px rgba(0, 0, 0, 0.288));
+    overflow: hidden;
+}
+
+.dashboardCardTitle{
+
+    font-family: 'Poppins';
+    font-size: 16px;
+    color: #4A4A4A;
+}
+.dashboardCardChart{
+    padding-top: 1rem;
+    height: 100%;
+    overflow: hidden;
+}
+
+.dashboardCardChartTop{
+    height: calc(90vh/3*2);
+}
+.dashboardCardChartWidget{
+    height: calc(90vh/3);
+}
+
+.emptyOuterWrapper{
+    height: 100%;
+    width: 100%;
+    padding: 10px 0px;
+}
+.dashboardCardEmptyOuter{
+    height: 100%;
+    width: 100%;
+    border-width: 8px;
+    border-color: #EBEDF3;
+    border-style: dashed;
+    border-radius: 14px ;
+}
+.dashboardCardEmptyText{
+    font-family: 'Poppins';
+    font-weight: 600;
+    color: #D1D5DF;
+    text-align: center;
+}
+.leaderboardText{
+    
+    font-family: 'Poppins';
+    color:white;
+    font-size: 2rem;
+    font-weight: 600;
+}
+.trendingcoinTopText{
+    font-family: 'Poppins';
+    color: #707070;
+    line-height: 90%;
+    font-size: 0.8rem;
+}
+.trendingcoinBottomText{
+    font-family: 'Poppins';
+    color: #ABABAB;
+    font-size: 0.7rem;
+}
+.trendingCoinBox{
+    border-width: 0px 3px ;
+    border-style: solid;
+    border-color: white;
+}
+.sentimentComparisonTicker{
+    text-align: center;
+    color:#707070;
+    font-size: 0.9rem;
+}
+.sentimentComparisonBackground{
+    background-color: #E35B5B;
+}
+.sentimentComparisonItem{
+    background-color: #0E8D5A;
+    color: rgba(0, 0, 0, 0);
+}
+.fearAndGreedTextBottom{
+    margin: 0px;
+    font-weight: 600;
+}
+.fearAndGreedTextUp{
+    margin: 0px;
+    line-height: 90%;
+    font-size: 0.9rem;
+}
+.fearAndGreedLine{
+    border-bottom: #D5D5D5;
+    margin:0;
+    /* border-style: solid; */
+}
+.fearAndGreedTextNumber{
+    border-radius: 50%;
+    width: 36px;
+    color:white;
+    font-weight: 600px;
+
+}

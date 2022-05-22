@@ -1,0 +1,11 @@
+$theme-colors: (
+    "primary":#2467DB,
+    "info": tomato,
+    "danger": teal
+);
+
+$font-family-sans-serif: "Poppins",-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto;
+$font-family-serif: "Poppins",-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto;
+
+/* import bootstrap to set changes */
+@import "~bootstrap/scss/bootstrap";
