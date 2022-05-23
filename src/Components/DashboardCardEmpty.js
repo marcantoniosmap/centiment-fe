@@ -1,9 +1,16 @@
-export default function DashboardCardEmpty(){
+import { useDashboard } from "../DashboardContext"
+
+export default function DashboardCardEmpty({loc}){
+
+    const {setModal,chooseWidgetModal}=useDashboard()
+
+    // console.log(loc)
+
 
     return(
-        <div className="emptyOuterWrapper">
+        <div className="emptyOuterWrapper" onClick={()=>setModal(true,loc)}>
             <div className="dashboardCardEmptyOuter d-flex justify-content-center align-items-center">
-                <div>
+                <div >
                     <div className="d-flex justify-content-center h-100">
                         <svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="80" height="80" viewBox="0 0 80 80">
                             <defs>

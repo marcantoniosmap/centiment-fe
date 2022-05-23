@@ -6,13 +6,16 @@ import {
 } from "react-router-dom";
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import DashboardView from "./View/DashboardView";
-import Navbar from "./Components/Navbar";
+import NavbarCustom from "./Components/NavbarCustom";
+import { DashboardProvider } from "./DashboardContext";
+import ModalChooseWidget from "./Components/ModalChooseWidget";
 
-function App(props) {
+function App() {
   return (
     <>
-      {/* <Navbar/> */}
+      <NavbarCustom/>
       <Router>
+        <DashboardProvider>
         <Routes>
           <Route 
             exact
@@ -20,7 +23,10 @@ function App(props) {
             element={<DashboardView/>}
             />
           </Routes>
+          </DashboardProvider>
         </Router>
+
+        
       </>
   );
 }

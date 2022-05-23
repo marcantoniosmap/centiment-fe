@@ -2,15 +2,45 @@ import DashboardCardHeader from "../Components/DashboardCardHeader"
 import DashboardCardEmpty from "../Components/DashboardCardEmpty"
 import DashboardCardPriceChart from "../Components/DashboardCardPriceChart"
 import priceChartData from '../priceChartData'
+import widgetLibrary from "../widgetLibrary"
 import DashboardCardSentimentTest from "../Components/DashboardCardSentimentTest"
 import DashboardCardTrendingCoin from "../Components/DashboardCardTrendingCoin"
 import DashboardCardTTVolume from "../Components/DashboardCardTTvolume"
 import DashboardCardSentimentComparison from "../Components/DashboardCardSentimentCompare"
 import DashboardCardFearAndGreed from "../Components/DashboardCardFearAndGreed"
-import TweetEmbed from "react-tweet-embed"
+import DashboardCardTweetVolumeSentiment from "../Components/DashboardCardTweetVolumeSentiment"
+import { useDashboard } from "../DashboardContext"
+import ModalChooseWidget from "../Components/ModalChooseWidget"
+// import TweetEmbed from "react-tweet-embed"
 export default function DashboardView(props){
 
+
+    const {widgetSetup,chooseWidgetModal,setModal}=useDashboard()
+    // console.log(chooseWidgetModal)
+
+    function renderSwitch(param,loc){
+        switch(param){
+            case 'widget-1':
+                return <DashboardCardTweetVolumeSentiment data={[]} loc={loc}/>
+            case 'widget-2':
+                return <DashboardCardSentimentTest loc={loc}/>
+            case 'widget-3':
+                return <DashboardCardTrendingCoin loc={loc}/>
+            case 'widget-4':
+                return <DashboardCardTTVolume loc={loc}/>
+            case 'widget-5':
+                return <DashboardCardSentimentComparison loc={loc}/>
+            case 'widget-6':
+                return <DashboardCardFearAndGreed loc={loc}/>
+            case 'none':
+                return <DashboardCardEmpty loc={loc}/>
+            default:
+                return <></>
+        }
+    }
+
     const dataTT = [{ twitter_volume: 0, trade_volume:2,  time: 1642425322 }, { twitter_volume: 8, trade_volume:3, time: 1642511722 }, { twitter_volume: 10,trade_volume:2, time: 1642598122 }, { twitter_volume: 20, trade_volume:24, time: 1642684522 }, { twitter_volume: 3, trade_volume:9, time: 1642770922 }, { twitter_volume: 43,trade_volume:54,  time: 1642857322 }, { twitter_volume: 41, trade_volume:51, time: 1642943722 }, { twitter_volume: 43,trade_volume:40, time: 1643030122 }, { twitter_volume: 56,trade_volume:50, time: 1643116522 }, { twitter_volume: 46, trade_volume:44, time: 1643202922 }];
+    const dataVolumeSentiment  = [{ value: 1, time: 1642425322 }, { value: 8, time: 1642511722 }, { value: 10, time: 1642598122 }, { value: 20, time: 1642684522 }, { value: 3, time: 1642770922, color: '#E35B5B' }, { value: 43, time: 1642857322 }, { value: 41, time: 1642943722, color: '#E35B5B' }, { value: 43, time: 1643030122 }, { value: 56, time: 1643116522 }, { value: 46, time: 1643202922, color: '#E35B5B' }];
     const dataCoinSentimentComparison=[
         {
             ticker:'BTC',
@@ -59,7 +89,7 @@ export default function DashboardView(props){
                         <div className="dashboardCard d-flex flex-column">
                             <DashboardCardHeader chartTitle={'Recent Tweets'}/>
                                 <div className="dashboardCardChart">
-                                    <TweetEmbed id="1528007230884179970" placeholder="loading"/>
+                                    {/* <TweetEmbed id="1528007230884179970" placeholder="loading"/> */}
                                 </div>
 
                         </div>
@@ -68,18 +98,34 @@ export default function DashboardView(props){
                 </div>
 
                 <div className="row mt-4">
-                    <div className="col-lg-4"><div className="dashboardCard d-flex flex-column dashboardCardChartWidget"><DashboardCardEmpty/></div></div>
+
+                    {
+                        widgetSetup.map((singleItem,index)=>(
+                            <div className="col-lg-4" key={index}>
+                                <div className="dashboardCard d-flex flex-column dashboardCardChartWidget">
+                                    {singleItem.id!=='none' && <DashboardCardHeader loc={index} chartTitle={widgetLibrary[singleItem.id].title}/>}
+                                    {renderSwitch(singleItem.id,index)}
+                                </div>
+                            </div>
+                        ))
+                    }
+                    {/* <div className="col-lg-4"><div className="dashboardCard d-flex flex-column dashboardCardChartWidget"><DashboardCardEmpty/></div></div> */}
+                    {/* <div className="col-lg-4"><div className="dashboardCard d-flex flex-column dashboardCardChartWidget"><DashboardCardHeader chartTitle={'Tweet Volume and Sentiment'}/><DashboardCardTweetVolumeSentiment data={dataVolumeSentiment}/></div></div>
                     <div className="col-lg-4"><div className="dashboardCard d-flex flex-column dashboardCardChartWidget"><DashboardCardHeader chartTitle={'Twitter Sentiment Test'}/><DashboardCardSentimentTest/></div></div>
-                    <div className="col-lg-4"><div className="dashboardCard d-flex flex-column dashboardCardChartWidget"><DashboardCardHeader chartTitle={'Trending Coin based on Tweets'}/><DashboardCardTrendingCoin/></div></div>
+                    <div className="col-lg-4"><div className="dashboardCard d-flex flex-column dashboardCardChartWidget"><DashboardCardHeader chartTitle={'Trending Coin based on Tweets'}/><DashboardCardTrendingCoin/></div></div> */}
                 </div>
 
-                <div className="row mt-4">
-                    <div className="col-lg-4"><div className="dashboardCard d-flex flex-column dashboardCardChartWidget"><DashboardCardHeader chartTitle={'Tweet and Trending Volume'}/><div className="dashboardCardChart"><DashboardCardTTVolume data={dataTT}/></div></div></div>
+                {/* <div className="row mt-4">
+                    <div className="col-lg-4"><div className="dashboardCard d-flex flex-column dashboardCardChartWidget"><DashboardCardHeader chartTitle={'Tweet & Trade Correlation'}/><div className="dashboardCardChart"><DashboardCardTTVolume data={dataTT}/></div></div></div>
                     <div className="col-lg-4"><div className="dashboardCard d-flex flex-column dashboardCardChartWidget"><DashboardCardHeader chartTitle={'Coin Sentiment Comparison'}/><div className="dashboardCardChart"><DashboardCardSentimentComparison data={dataCoinSentimentComparison}/></div></div></div>
                     <div className="col-lg-4"><div className="dashboardCard d-flex flex-column dashboardCardChartWidget"><DashboardCardHeader chartTitle={'Twitter Fear and Greed Index'}/><div className="dashboardCardChart"><DashboardCardFearAndGreed data={dataTT}/></div></div></div>
-                </div>
+                </div> */}
 
             </div>
+
+            <ModalChooseWidget 
+                show={chooseWidgetModal}
+                onHide={()=>setModal(false,null)}/>
         </div>
     )
 } 

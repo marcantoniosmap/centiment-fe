@@ -54,11 +54,11 @@ export default function DashboardCardFearAndGreed(){
                 <div className="d-flex flex-column">
                     {data.map((singleItem,index)=>(
                         <>
-                        <div className="pt-2 pb-1">
+                        <div className="py-2">
                             <div className="d-flex justify-content-between">
                                 <div>
                                     <p className="fearAndGreedTextUp">{singleItem.time}</p>
-                                    <p className="fearAndGreedTextBottom">{singleItem.text}</p>
+                                    <p className="fearAndGreedTextBottom" style={{color:library[singleItem.text]}}>{singleItem.text}</p>
                                 </div>
                                 <div className="fearAndGreedTextNumber d-flex justify-content-center align-items-center" style={{backgroundColor:library[singleItem.text]}}>{singleItem.score}</div>
                             </div>

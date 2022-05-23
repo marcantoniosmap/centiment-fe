@@ -23,9 +23,31 @@ export default function DashboardCardTTVolume({data}){
 					textColor,
 				},
 				width: chartContainerRef.current.clientWidth,
-				height: 230,
-
+				height: 220,
+				handleScroll:false,
+				handleScale:false,
+				crosshair:{
+					visible:false,
+					vertLine:{
+						visible:false,
+						labelVisible:false
+					},
+					horzLine:{
+						visible:false,
+						labelVisible:false
+					}
+				}
 			});
+
+			chart.priceScale('right').applyOptions({
+				visible:false,
+				borderVisible:false,
+				entireTextOnly:true,
+				scaleMargins:{
+					top:0,
+					bottom:0
+				}
+			})
 			chart.timeScale().fitContent();
 
 			const twittervolumeData=[]

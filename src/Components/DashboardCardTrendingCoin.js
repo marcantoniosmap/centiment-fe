@@ -32,7 +32,6 @@ export default function DashboardCardTrendingCoin(){
             numoftweets:2083
         },
     ])
-    console.log(detailsPosition)
     return(
         <div className="w-100 pt-4">
             <div className="d-flex h-100 justify-content-center">
