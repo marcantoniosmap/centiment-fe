@@ -39,38 +39,7 @@ export default function DashboardView(props){
         }
     }
 
-    const dataTT = [{ twitter_volume: 0, trade_volume:2,  time: 1642425322 }, { twitter_volume: 8, trade_volume:3, time: 1642511722 }, { twitter_volume: 10,trade_volume:2, time: 1642598122 }, { twitter_volume: 20, trade_volume:24, time: 1642684522 }, { twitter_volume: 3, trade_volume:9, time: 1642770922 }, { twitter_volume: 43,trade_volume:54,  time: 1642857322 }, { twitter_volume: 41, trade_volume:51, time: 1642943722 }, { twitter_volume: 43,trade_volume:40, time: 1643030122 }, { twitter_volume: 56,trade_volume:50, time: 1643116522 }, { twitter_volume: 46, trade_volume:44, time: 1643202922 }];
-    const dataVolumeSentiment  = [{ value: 1, time: 1642425322 }, { value: 8, time: 1642511722 }, { value: 10, time: 1642598122 }, { value: 20, time: 1642684522 }, { value: 3, time: 1642770922, color: '#E35B5B' }, { value: 43, time: 1642857322 }, { value: 41, time: 1642943722, color: '#E35B5B' }, { value: 43, time: 1643030122 }, { value: 56, time: 1643116522 }, { value: 46, time: 1643202922, color: '#E35B5B' }];
-    const dataCoinSentimentComparison=[
-        {
-            ticker:'BTC',
-            percentage:20
-        },
-        {
-            ticker:'ETH',
-            percentage:70
-        },
-        {
-            ticker:'BNB',
-            percentage:30
-        },
-        {
-            ticker:'XRP',
-            percentage:80
-        },
-        {
-            ticker:'ADA',
-            percentage:50
-        },
-        {
-            ticker:'LUNA',
-            percentage:30
-        },
-        {
-            ticker:'SOL',
-            percentage:40
-        },
-    ]
+
     return(
         <div className="backgroundDefault">
             <div className="container-fluid py-2 px-3 h-100 w-100" style={{overflow:'hidden'}}>

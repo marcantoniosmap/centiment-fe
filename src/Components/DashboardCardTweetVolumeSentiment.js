@@ -1,11 +1,14 @@
 import { createChart,ColorType } from "lightweight-charts"
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
+import { useDashboard } from "../DashboardContext";
 
-export default function DashboardCardTweetVolumeSentiment({data}){
+export default function DashboardCardTweetVolumeSentiment({loc}){
 	
 
-    
+	
+	const {getWidgetData}=useDashboard()
 	const chartContainerRef = useRef();
+	const [data,setData]=useState(getWidgetData('widget-1'))
 
 	useEffect(
 		() => {

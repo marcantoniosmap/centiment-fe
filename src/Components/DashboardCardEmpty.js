@@ -2,7 +2,7 @@ import { useDashboard } from "../DashboardContext"
 
 export default function DashboardCardEmpty({loc}){
 
-    const {setModal,chooseWidgetModal}=useDashboard()
+    const {setModal}=useDashboard()
 
     // console.log(loc)
 

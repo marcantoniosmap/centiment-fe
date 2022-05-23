@@ -1,49 +1,47 @@
 import { useState } from "react"
+import { useDashboard } from "../DashboardContext"
 
 export default function DashboardCardTrendingCoin(){
 
+    const {getWidgetData}= useDashboard()
+
+    const [data,setData]=useState(getWidgetData('widget-3'))
 
     const [detailsPosition,setDetailsPositioin]=useState([
         {
             pos:2,
-            height:'100px',
-            coinName:'bitcoin',
+            height:'75px',
             backgroundColor:'#D1C51F',
-            coin_logo:'',
-            percentage:'20%',
-            numoftweets:2083
         },
         {
             pos:1,
-            height:'125px',
+            height:'100px',
             coinName:'ethereum',
             backgroundColor:'#0E8D5A',
-            coin_logo:'',
             percentage:'20%',
             numoftweets:2083
         },
         {
             pos:3,
-            height:'75px',
+            height:'60px',
             coinName:'binance',
             backgroundColor:'#E35B5B',
-            coin_logo:'',
             percentage:'20%',
             numoftweets:2083
         },
     ])
     return(
-        <div className="w-100 pt-4">
+        <div className="w-100 h-100 pt-4">
             <div className="d-flex h-100 justify-content-center">
                 <div className="row w-100 align-items-end">
                     {
                         detailsPosition.map((singleitem,index)=>(
                             <div className="col-4 px-0">
                                 <div className="floatingText d-flex justify-content-center text-center">
-                                    <div>
-                                        <img className="mb-2"src={`./img/icon/${singleitem.coinName}.png`}/>
-                                        <p className="mb-0  trendingcoinTopText">{singleitem.percentage} higher than usual</p>
-                                        <p className="trendingcoinBottomText mb-1">{singleitem.numoftweets} tweets today</p>
+                                    <div className="pb-2">
+                                        <img className="mb-2"src={`./img/icon/${data[singleitem.pos-1].coinName}.png`} alt={data[singleitem.pos]}/>
+                                        <p className="mb-0  trendingcoinTopText">{data[singleitem.pos-1].percentage} higher than usual</p>
+                                        <p className="trendingcoinBottomText mb-1">{data[singleitem.pos-1].numoftweets} tweets today</p>
                                     </div>
                                 </div>
                                 <div className="trendingCoinBox"style={{height:singleitem.height, backgroundColor:singleitem.backgroundColor}}>

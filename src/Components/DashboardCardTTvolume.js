@@ -1,7 +1,8 @@
 import { createChart,ColorType } from "lightweight-charts"
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
+import { useDashboard } from "../DashboardContext";
 
-export default function DashboardCardTTVolume({data}){
+export default function DashboardCardTTVolume(){
 	
 	const backgroundColor = 'white'
 	const lineColor = '#2962FF'
@@ -10,6 +11,9 @@ export default function DashboardCardTTVolume({data}){
 	const areaBottomColor = 'rgba(41, 98, 255, 0.28)'
     
 	const chartContainerRef = useRef();
+
+	const {getWidgetData}=useDashboard()
+	const [data,setData]=useState(getWidgetData('widget-4'))
 
 	useEffect(
 		() => {
@@ -79,9 +83,17 @@ export default function DashboardCardTTVolume({data}){
 	);
 
 	return (
+		<>
 		<div
 			ref={chartContainerRef}
-		/>
+			/>
+			<div className="TnTLegend row ">
+				<div className="col-3"><hr className="TnTlegendLine" style={{border:'2px solid #0E8D5A', opacity:1}}/></div>
+				<div className="col-9 px-0 d-flex align-items-center"><span className="TnTlegendText">Tweet Volume</span></div>
+				<div className="col-3"><hr className="TnTlegendLine" style={{border:'2px solid #E35B5B', opacity:1}}/></div>
+				<div className="col-9 px-0 d-flex align-items-center"><span className="TnTlegendText">Trade Volume</span></div>
+			</div>
+		</>
 	);
 };
 
