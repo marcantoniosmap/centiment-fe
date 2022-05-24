@@ -140,6 +140,7 @@
 }
 .settingpopupchild{
     margin: 0;
+    cursor: pointer;
     font-size: 0.9rem;
     color: #4A4A4A
 }
@@ -187,4 +188,7 @@
 }
 .TnTlegendText{
     font-size: 0.8rem;
+}
+.disabledModalpicture{
+    filter: grayscale(1);
 }

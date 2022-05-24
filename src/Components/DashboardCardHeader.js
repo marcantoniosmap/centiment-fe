@@ -39,6 +39,12 @@ export default function DashboardCardHeader({chartTitle,loc}){
                 <div className={`settingpopup ${showSetting ? 'helo':'d-none'}`} >
                     <div className="d-flex flex-column justify-content-between h-100">
 
+                        <div className="settingpopupchild py-2" onClick={handleDelete}>
+                            <span className="px-3">Refresh</span>
+                        </div>
+                        <div className="settingpopupchild py-2" onClick={handleDelete}>
+                            <span className="px-3">Change Timeframe</span>
+                        </div>
                         <div className="settingpopupchild py-2" onClick={changeWidget}>
                             <span className="px-3">Change Widget</span>
                         </div>

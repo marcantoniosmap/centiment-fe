@@ -78,6 +78,7 @@ const widget3Data=[
     const [widgetSetup,setWidgetSetup]=useState(presetWidget)
     const [chooseWidgetModal,setChooseWidgetModal]=useState(false)
     const [selectedLocation,setSelectedLocation]=useState(null)
+    const [activeWidget,setActiveWidget]=useState([])
 
     function refreshData(userID,location){
         return 0
@@ -87,9 +88,20 @@ const widget3Data=[
             var tempArray = widgetSetup;
             tempArray[selectedLocation].id= "widget-"+selectedChoice
             setWidgetSetup(tempArray)
+            updateActiveWidget()
             setModal(false,null)
         }else return
             
+    }
+    useEffect(()=>{
+        updateActiveWidget()
+    },[])
+
+    function updateActiveWidget(){
+        var tempArray=widgetSetup.map(a=>a.id)
+        setActiveWidget(tempArray)
+        console.log('useEffect Played')
+
     }
 
     function setModal(command,location){
@@ -101,7 +113,9 @@ const widget3Data=[
         var tempArray = widgetSetup;
         tempArray[location].id= "none"
         setWidgetSetup(tempArray)
+        updateActiveWidget()
         setModal(false,null)
+
     }
 
     function getWidgetData(widgetType){
@@ -132,10 +146,11 @@ const widget3Data=[
     const value ={
         widgetSetup,
         chooseWidgetModal,
+        activeWidget,
         setModal,
         submitAddWidget,
         deleteWidget,
-        getWidgetData
+        getWidgetData,
     }
 
     return (
