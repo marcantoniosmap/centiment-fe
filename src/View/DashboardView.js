@@ -11,6 +11,8 @@ import DashboardCardFearAndGreed from "../Components/DashboardCardFearAndGreed"
 import DashboardCardTweetVolumeSentiment from "../Components/DashboardCardTweetVolumeSentiment"
 import { useDashboard } from "../DashboardContext"
 import ModalChooseWidget from "../Components/ModalChooseWidget"
+import DashboardCardRecentTweets from "../Components/DashboardCardRecentTweets"
+import DashboardCardCoinInformation from "../Components/DashboardCardCoinInformation"
 // import TweetEmbed from "react-tweet-embed"
 export default function DashboardView(props){
 
@@ -54,14 +56,34 @@ export default function DashboardView(props){
 
                     </div>
                     
-                    <div className="col-lg-4 dashboardCardChartTop">
+                    {/* <div className="col-lg-4 dashboardCardChartTop d-flex justify-content-between flex-column align-items-start">
                         <div className="dashboardCard d-flex flex-column">
                             <DashboardCardHeader chartTitle={'Recent Tweets'}/>
                                 <div className="dashboardCardChart">
-                                    {/* <TweetEmbed id="1528007230884179970" placeholder="loading"/> */}
                                 </div>
-
                         </div>
+                        <div className="dashboardCard d-flex flex-column">
+                            <DashboardCardHeader chartTitle={'Recent Tweets'}/>
+                                <div className="dashboardCardChart">
+                                </div>
+                        </div>
+                    </div> */}
+
+                    <div className="col-lg-4 dashboardCardChartTop">
+                        <div className="d-flex justify-content-start flex-column h-100">
+                            <div className="col-12 h-50 pb-4">
+                                <div className="dashboardCard">
+                                    <DashboardCardHeader chartTitle={'Coin Option'}/>
+                                    <div className="dashboardCardChart"><DashboardCardCoinInformation/></div>
+                                </div>
+                            </div>
+                            <div className="col-12 h-50">
+                                <div className="dashboardCard h-100 d-flex flex-column">
+                                    <DashboardCardHeader chartTitle={'Recent Tweets'}/>
+                                    <div className="dashboardCardChart"><DashboardCardRecentTweets/></div>
+                                </div>
+                            </div>
+                            </div>
                     </div>
 
                 </div>
@@ -92,9 +114,7 @@ export default function DashboardView(props){
 
             </div>
 
-            <ModalChooseWidget 
-                show={chooseWidgetModal}
-                onHide={()=>setModal(false,null)}/>
+            <ModalChooseWidget/>
         </div>
     )
 } 

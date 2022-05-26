@@ -24,8 +24,8 @@
     color: #4A4A4A;
 }
 .dashboardCardChart{
-    padding-top: 1rem;
-    height: 100%;
+    /* padding-top: 1rem; */
+    /* height: 100%; */
     overflow: hidden;
 }
 
@@ -191,4 +191,98 @@
 }
 .disabledModalpicture{
     filter: grayscale(1);
+}
+
+.topDashboardHeight{
+    min-height: 150px;
+}
+
+.twitterUserPic{
+    border-radius:50% ;
+    width: 40px;
+    height: 40px;
+    background-color: #707070;
+    color:white;
+    margin: 0;
+    font-weight: 600;
+}
+
+.twitterScore{
+    border-radius:50% ;
+    width: 30px;
+    height: 30px;
+    background-color: #707070;
+    color:white;
+    margin: 0;
+    font-size: 0.8rem;
+}
+.scrollWrapper{
+    overflow-y: scroll;
+    /* overflow: auto; */
+    height: 100%;
+    -ms-overflow-style: none;
+  scrollbar-width: none; 
+}
+.scrollWrapper::-webkit-scrollbar {
+    display: none;
+  }
+
+.twitterUsername{
+    color:#545454;
+    padding-top: 3%;
+    font-size: 0.9rem;
+    line-height: 95%;
+
+}
+.twitterTime{
+    color:#949494;
+    font-size: 0.8rem;
+    font-style:italic ;
+
+}
+.tweetMessage{
+    font-weight: 500;
+}
+
+.tweeterAvatar{
+vertical-align: middle;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+}
+.infoCoinName{
+    font-weight: 700;
+    font-size: 1.3rem;
+}
+.infoTicker{
+    font-size: 0.8rem;
+    margin-top: 0.1rem;
+    font-weight: 600;
+    padding: 0 0.3rem;
+    background-color: #EBEDF3;
+    border-radius: 2px;
+}
+.labelSmall{
+    color:#ABABAB;
+    font-size: 0.8rem;
+
+}
+.infoNumbers{
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+.indicator{
+    font-weight: 600;
+    font-size: 0.8rem;
+}
+.textRed{
+    color:#E35B5B
+}
+.textGreen{
+    color:#0E8D5A
+}
+.coinInfoBorder{
+    border-right: #D5D5D5;
+    border-right-style: solid;
+    border-right-width: 1px;
 }

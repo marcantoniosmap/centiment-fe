@@ -73,6 +73,37 @@ const widget3Data=[
     }
 ]
 
+    const recentTweetData=[
+        {
+            id:"1528370668747649024",
+            twitterHandle:'marcant79111897',
+            time :'2 minutes ago',
+            tweetContentText:'$XRP is going nowhere',
+            score :65,
+        },
+        {
+            id:"1529032149638209536",
+            twitterHandle:'cz_binance',
+            time :'2022/04/21',
+            tweetContentText:'2 years ago, #BNB price was $16.',
+            score :32,
+        },
+        {
+            id:"1508784687774412807",
+            twitterHandle:'market_reckr',
+            time :'2022/04/21',
+            tweetContentText:'#CBDC The biggest Joke I’ve ever seen !! What a ……',
+            score :89,
+        },
+        {
+            id:"1503375427494100999",
+            twitterHandle:'generationalbtc',
+            time :'2022/04/21',
+            tweetContentText:'#Bitcoin is being drained from exchanges ',
+            score :20,
+        }
+    ]
+
 
     // const [isIndo,setIsIndo] =useState(true)
     const [widgetSetup,setWidgetSetup]=useState(presetWidget)
@@ -100,7 +131,6 @@ const widget3Data=[
     function updateActiveWidget(){
         var tempArray=widgetSetup.map(a=>a.id)
         setActiveWidget(tempArray)
-        console.log('useEffect Played')
 
     }
 
@@ -115,7 +145,10 @@ const widget3Data=[
         setWidgetSetup(tempArray)
         updateActiveWidget()
         setModal(false,null)
+    }
 
+    function getRecentTweet(){
+        return recentTweetData
     }
 
     function getWidgetData(widgetType){
@@ -151,6 +184,7 @@ const widget3Data=[
         submitAddWidget,
         deleteWidget,
         getWidgetData,
+        getRecentTweet,
     }
 
     return (
