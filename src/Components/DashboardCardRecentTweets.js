@@ -24,13 +24,13 @@ export default function DashboardCardRecentTweets(){
         <>
         <div className="scrollWrapper p-2 pt-3">
         {recentTweets.map((singleItem,index)=>(
-            <div className="recentTweetWrapper">
+            <div className="recentTweetWrapper" key={index}>
                 <a target='_blank' href={`https://twitter.com/${singleItem.twitterHandle}/status/${singleItem.id}`}>
                 <div className="d-flex justify-content-between">
                     <div className="leftSide d-flex justify-content-start">
                         <div className="">
                             {/* <div className="twitterUserPic d-flex justify-content-center align-items-center" style={{backgroundColor:randomColor()}}>{singleItem.twitterHandle[0].toUpperCase()}</div> */}
-                                <img className='tweeterAvatar'src={`https://unavatar.io/twitter/${singleItem.twitterHandle}`} />
+                                <img className='tweeterAvatar'src={`https://unavatar.io/twitter/${singleItem.twitterHandle}`}  alt={`@${singleItem.twitterHandle} profile pic`}/>
                         </div>
                         <div style={{paddingLeft:'0.5rem'}}>
                             <p className="m-0 twitterUsername">@{singleItem.twitterHandle}</p>

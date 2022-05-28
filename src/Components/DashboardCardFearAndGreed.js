@@ -53,7 +53,7 @@ export default function DashboardCardFearAndGreed(){
             <div className="col-lg-5">
                 <div className="d-flex flex-column">
                     {data.map((singleItem,index)=>(
-                        <>
+                        <div key={index}>
                         <div className="py-2">
                             <div className="d-flex justify-content-between">
                                 <div>
@@ -65,7 +65,7 @@ export default function DashboardCardFearAndGreed(){
                             
                         </div>
                             <hr className="fearAndGreedLine"/>
-                        </>
+                        </div>
                     ))}
                 </div>
             </div>

@@ -2,16 +2,18 @@ import { createChart,ColorType } from "lightweight-charts"
 import { useRef, useEffect, useState } from "react";
 import { useDashboard } from "../DashboardContext";
 
-export default function DashboardCardTweetVolumeSentiment({loc}){
+export default function DashboardCardTweetVolumeSentiment({loc,refreshTrigger}){
 	
-
 	
 	const {getWidgetData}=useDashboard()
 	const chartContainerRef = useRef();
 	const [data,setData]=useState(getWidgetData('widget-1'))
-
+	console.log('hello satu doang')
+	// setData(getWidgetData('widget-1'))
+	
 	useEffect(
 		() => {
+			setData(getWidgetData('widget-1'))
 			const handleResize = () => {
 				chart.applyOptions({ width: chartContainerRef.current.clientWidth });
 			};
@@ -61,7 +63,7 @@ export default function DashboardCardTweetVolumeSentiment({loc}){
 				chart.remove();
 			};
 		},
-		[data]
+		[refreshTrigger]
 	);
 
 	return (

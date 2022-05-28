@@ -286,3 +286,15 @@ vertical-align: middle;
     border-right-style: solid;
     border-right-width: 1px;
 }
+
+.hoverSelectedText{
+    position: absolute;
+    border-radius: 2px;
+    color:white;
+    background-color: #E35B5B;
+    padding: 2px 0.5rem;
+    top:12px;
+    font-size: 0.8rem;
+    left:25px;
+    font-weight: 600;
+}
