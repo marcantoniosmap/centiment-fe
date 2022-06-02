@@ -5,15 +5,14 @@ import { useDashboard } from "../DashboardContext";
 export default function DashboardCardTweetVolumeSentiment({loc,refreshTrigger}){
 	
 	
-	const {getWidgetData}=useDashboard()
+	const {getWidgetData,widget1_data}=useDashboard()
 	const chartContainerRef = useRef();
-	const [data,setData]=useState(getWidgetData('widget-1'))
-	console.log('hello satu doang')
-	// setData(getWidgetData('widget-1'))
+	// const [data,setData]=useState(getWidgetData('widget-1'))
+	
 	
 	useEffect(
 		() => {
-			setData(getWidgetData('widget-1'))
+			// setData(getWidgetData('widget-1'))
 			const handleResize = () => {
 				chart.applyOptions({ width: chartContainerRef.current.clientWidth });
 			};
@@ -46,7 +45,7 @@ export default function DashboardCardTweetVolumeSentiment({loc,refreshTrigger}){
 
 
 			const histogramSeries = chart.addHistogramSeries({ color: '#0E8D5A' });
-			histogramSeries.setData(data);
+			histogramSeries.setData(widget1_data);
 			
 
 			
@@ -63,7 +62,7 @@ export default function DashboardCardTweetVolumeSentiment({loc,refreshTrigger}){
 				chart.remove();
 			};
 		},
-		[refreshTrigger]
+		[refreshTrigger,widget1_data]
 	);
 
 	return (

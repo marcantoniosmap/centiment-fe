@@ -34,31 +34,33 @@ export function DashboardProvider({children}){
             percentage:50
         },
         {
-            ticker:'LUNA',
+            ticker:'SOL',
             percentage:30
         },
         {
-            ticker:'SOL',
+            ticker:'DOGE',
             percentage:40
         },
     ]
 
-const widget3Data=[
+    const widgetDoesNotUpdateOnChangeCoin=['widget-2','widget-3','widget-5']
+
+    const widget3Data=[
         {
             coinName:'Bitcoin',
             percentage:'30%',
             numoftweets:10043
-    
-    },{
-        coinName:'Ethereum',
-        percentage:'20%',
-        numoftweets:2421
-    },{
-        coinName:'Binance',
-        percentage:'20%',
-        numoftweets:583
-    }
-]
+        
+        },{
+            coinName:'Ethereum',
+            percentage:'20%',
+            numoftweets:2421
+        },{
+            coinName:'Binance',
+            percentage:'20%',
+            numoftweets:583
+        }
+    ]
 
     const recentTweetData=[
         {
@@ -91,6 +93,28 @@ const widget3Data=[
         }
     ]
 
+    const W6data=[
+        {
+          time: 'Now',
+          score: 40,
+          text : 'Fear'
+        },
+        {
+          time: 'Yesterday',
+          score: 24,
+          text: 'Extreme Fear'
+        },
+        {
+          time: 'Last Week',
+          score: 75,
+          text : 'Greed'
+        },
+        {
+          time: 'Last Month',
+          score: 81,
+          text : 'Extreme Greed'
+        },
+  ]
 
     // const [isIndo,setIsIndo] =useState(true)
     const [widgetSetup,setWidgetSetup]=useState(presetWidget)
@@ -100,9 +124,19 @@ const widget3Data=[
     const [activeCoin,setActiveCoin]=useState('Bitcoin')
     const [activeCoinInfo,setActiveCoinInfo]=useState(fakeCoinInfoData[activeCoin])
 
-    function refreshData(userID,location){
-        return 0
-    }
+    const [widget1_data,setWidget1_data]=useState(dataVolumeSentiment)
+    const [widget2_data,setWidget2_data]=useState([])
+    const [widget3_data,setWidget3_data]=useState(widget3Data)
+    const [widget4_data,setWidget4_data]=useState(dataTT)
+    const [widget5_data,setWidget5_data]=useState(dataCoinSentimentComparison)
+    const [widget6_data,setWidget6_data]=useState(W6data)
+    const [widgetPrice_data,setWIdgetPrice_data]=useState([])
+    const [widgetCoinInfo_data,setWidgetCoinInfo_data]=useState([])
+    const [widgetTweets_data,setWidgetTweets_data]=useState([])
+
+
+    const arrayOfWidget=[widget1_data,widget3_data,widget4_data,widget5_data,widget6_data,widgetPrice_data,widgetCoinInfo_data,widgetTweets_data]
+
     function submitAddWidget(selectedChoice){
         if (typeof selectedChoice === 'number' && isFinite(selectedChoice)){
             var tempArray = widgetSetup;
@@ -140,12 +174,13 @@ const widget3Data=[
         return recentTweetData
     }
 
-    // var getDaysArray = function(start, end) {
-    //     for(var arr=[],dt=new Date(start); dt<=new Date(end); dt.setDate(dt.getDate()+1)){
-    //         arr.push(new Date(dt).toISOString().slice(0,10));
-    //     }
-    //     return arr;
-    // };
+    function sentimentGrouping(score){
+        if (score>=80) return 'Extreme Greed'
+        if (score<80 && score >=60 ) return 'Greed'
+        if (score<60 && score >=40) return 'Neutral'
+        if (score<40 && score >=20) return 'Fear'
+        else return 'Extreme Fear'
+    }
     
     function getTimeArray(period){
         var daysBackward=0
@@ -173,6 +208,70 @@ const widget3Data=[
         return finalArray
     }
 
+    function getWidget3(period){
+        
+        return [
+            {
+                coinName:'Bitcoin',
+                percentage:'30%',
+                numoftweets:Math.floor(Math.random()*2000)
+            
+            },{
+                coinName:'Ethereum',
+                percentage:'20%',
+                numoftweets:Math.floor(Math.random()*2000)
+            },{
+                coinName:'Binance',
+                percentage:'20%',
+                numoftweets:Math.floor(Math.random()*2000)
+            }
+        ]
+    }
+    function getWidget6(){
+        var arr=['Now','Yesterday','Last Week','Last Month']
+        var arrReturn=[]
+        arr.map((singleItem)=>{
+            var tempNum=Math.floor(Math.random()*100)
+            arrReturn.push({
+                time:singleItem,
+                score: tempNum,
+                text:sentimentGrouping(tempNum)
+            })
+        })
+        return arrReturn
+    }
+
+    function getWidget5(period){
+        var temp=[]
+        dataCoinSentimentComparison.map((singleItem)=>{
+            temp.push({
+                ticker:singleItem.ticker,
+                percentage:Math.floor(Math.random()*90)+10
+            })
+        })
+        return temp
+    }
+
+    function refreshWidget(widgetType){
+        switch(widgetType){
+            case 'widget-1':
+                return setWidget1_data(getWidget1('weekly'))
+            case 'widget-2':
+                return []
+            case 'widget-3':
+                return setWidget3_data(getWidget3('weekly'))
+            case 'widget-4':
+                return dataTT
+            case 'widget-5':
+                return setWidget5_data(getWidget5('weekly'))
+            case 'widget-6':
+                return setWidget6_data(getWidget6())
+            default:
+                return <></>
+        }
+    }
+
+
     // console.log(getWidget1('weekly'))
 
     function getWidgetData(widgetType){
@@ -192,24 +291,43 @@ const widget3Data=[
             default:
                 return <></>
         }
+    }
 
+    function setWidgetData(widgetType){
+        switch(widgetType){
+            case 'widget-1':
+                return getWidget1('weekly')
+            case 'widget-2':
+                return []
+            case 'widget-3':
+                return widget3Data
+            case 'widget-4':
+                return dataTT
+            case 'widget-5':
+                return dataCoinSentimentComparison
+            case 'widget-6':
+                return 0
+            default:
+                return <></>
+        }
 
     }
-    function setWidgetData(){
 
-    }
     function getCurrentCoin(){
         return activeCoin
     }
     function setCurrentCoin(choice){
         setActiveCoin(choice)
         setActiveCoinInfo(fakeCoinInfoData[choice])
+        activeWidget.map((widget,index)=>{
+            if(!widgetDoesNotUpdateOnChangeCoin.includes(widget)){
+                refreshWidget(widget) 
+            }
+    })
 
     }
     function getCoinDetail(){
         const currentCoin=activeCoin
-        // console.log(activeCoin)
-        // return fakeCoinInfoData[currentCoin]
         setActiveCoinInfo(fakeCoinInfoData[currentCoin])
     }
     function sentimentTest(param){
@@ -232,9 +350,21 @@ const widget3Data=[
         getRecentTweet,
         getCurrentCoin,
         setCurrentCoin,
+        setWidgetData,
         getCoinDetail,
         activeCoinInfo,
         sentimentTest,
+
+        widget1_data,
+        widget2_data,
+        widget3_data,
+        widget4_data,
+        widget5_data,
+        widget6_data,
+        widgetPrice_data,
+        widgetCoinInfo_data,
+        widgetTweets_data,
+        refreshWidget
     }
 
     return (

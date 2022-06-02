@@ -11,32 +11,20 @@ import { useEffect, useState } from "react"
 
 export default function DashboardCardWidget({singleItem,index}){
 
-    const [refreshTrigger,setRefreshTrigger]=useState(0)
-
-    function refreshTriggerfunc(){
-        // console.log(Math.random()))
-        setRefreshTrigger(Math.random())
-    }
-    console.log(refreshTrigger)
-
-    useEffect(()=>{
-        console.log('diluar')
-    },[refreshTrigger])
-
-    function renderSwitch(param,loc,rt){
+    function renderSwitch(param,loc){
         switch(param){
             case 'widget-1':
-                return <DashboardCardTweetVolumeSentiment refreshTrigger={refreshTrigger} data={[]} loc={loc}/>
+                return <DashboardCardTweetVolumeSentiment data={[]} loc={loc}/>
             case 'widget-2':
-                return <DashboardCardSentimentTest refreshTrigger={rt} loc={loc}/>
+                return <DashboardCardSentimentTest  loc={loc}/>
             case 'widget-3':
-                return <DashboardCardTrendingCoin refreshTrigger={rt} loc={loc}/>
+                return <DashboardCardTrendingCoin  loc={loc}/>
             case 'widget-4':
-                return <DashboardCardTTVolume refreshTrigger={rt} loc={loc}/>
+                return <DashboardCardTTVolume loc={loc}/>
             case 'widget-5':
-                return <DashboardCardSentimentComparison refreshTrigger={rt} loc={loc}/>
+                return <DashboardCardSentimentComparison loc={loc}/>
             case 'widget-6':
-                return <DashboardCardFearAndGreed refreshTrigger={rt} loc={loc}/>
+                return <DashboardCardFearAndGreed loc={loc}/>
             case 'none':
                 return <DashboardCardEmpty loc={loc}/>
             default:
@@ -50,10 +38,10 @@ export default function DashboardCardWidget({singleItem,index}){
                     loc={index} 
                     chartId={singleItem.id} 
                     chartTitle={widgetLibrary[singleItem.id].title}
-                    setRefreshTrigger={refreshTriggerfunc}
+                    
                     
                     />}
-            {renderSwitch(singleItem.id,index,refreshTrigger)}
+            {renderSwitch(singleItem.id,index)}
 
         </div>
     )

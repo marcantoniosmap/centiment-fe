@@ -3,11 +3,11 @@ import { CloseButton } from "react-bootstrap"
 import { useDashboard } from "../DashboardContext"
 import widgetLibrary from "../widgetLibrary"
 
-export default function DashboardCardHeader({chartId,chartTitle,loc,setRefreshTrigger}){
+export default function DashboardCardHeader({chartId,chartTitle,loc}){
 
     const [showSetting,setShowSetting]=useState(false)
 
-    const {setModal,deleteWidget}=useDashboard()
+    const {setModal,deleteWidget,refreshWidget}=useDashboard()
     
     function changeWidget(){
         setShowSetting(false)
@@ -17,8 +17,8 @@ export default function DashboardCardHeader({chartId,chartTitle,loc,setRefreshTr
         deleteWidget(loc)
     }   
     function handleRefresh(){
-        setRefreshTrigger(Math.floor(Math.random()))
-        console.log('yes')
+        setShowSetting(false)
+        refreshWidget(chartId)
     }
     function handleChangeTimeframe(){
         return 0

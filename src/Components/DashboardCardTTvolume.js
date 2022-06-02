@@ -12,8 +12,7 @@ export default function DashboardCardTTVolume(){
     
 	const chartContainerRef = useRef();
 
-	const {getWidgetData}=useDashboard()
-	const [data,setData]=useState(getWidgetData('widget-4'))
+	const {widget4_data}=useDashboard()
 
 	useEffect(
 		() => {
@@ -56,7 +55,7 @@ export default function DashboardCardTTVolume(){
 
 			const twittervolumeData=[]
 			const tradevolumeData=[]
-			data.map((item,index)=>{
+			widget4_data.map((item,index)=>{
 				twittervolumeData.push({time:item.time,value:item.twitter_volume})
 				tradevolumeData.push({time:item.time,value:item.trade_volume})
 				
@@ -79,7 +78,7 @@ export default function DashboardCardTTVolume(){
 				chart.remove();
 			};
 		},
-		[data, backgroundColor, lineColor, textColor, areaTopColor, areaBottomColor]
+		[widget4_data]
 	);
 
 	return (
