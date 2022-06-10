@@ -19,7 +19,7 @@ export default function DashboardCardRecentTweets(){
         if (score<40 && score >=20) return '#DC8444'
         else return '#E35B5B'
     }
-
+            
     return(
         <>
         <div className="scrollWrapper p-2 pt-3">

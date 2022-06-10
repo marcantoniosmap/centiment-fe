@@ -271,9 +271,18 @@ vertical-align: middle;
     font-weight: 600;
     font-size: 1.1rem;
 }
+
+.infoNumbersHome{
+    font-weight: 600;
+
+}
 .indicator{
     font-weight: 600;
     font-size: 0.8rem;
+}
+.indicatorHome{
+    font-weight: 600;
+    font-size: 0.9rem;
 }
 .textRed{
     color:#E35B5B
@@ -296,5 +305,8 @@ vertical-align: middle;
     top:12px;
     font-size: 0.8rem;
     left:25px;
+    font-weight: 600;
+}
+.font-weight-bold{
     font-weight: 600;
 }

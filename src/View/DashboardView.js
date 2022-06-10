@@ -1,14 +1,6 @@
 import DashboardCardHeader from "../Components/DashboardCardHeader"
-import DashboardCardEmpty from "../Components/DashboardCardEmpty"
 import DashboardCardPriceChart from "../Components/DashboardCardPriceChart"
 import priceChartData from '../priceChartData'
-import widgetLibrary from "../widgetLibrary"
-import DashboardCardSentimentTest from "../Components/DashboardCardSentimentTest"
-import DashboardCardTrendingCoin from "../Components/DashboardCardTrendingCoin"
-import DashboardCardTTVolume from "../Components/DashboardCardTTvolume"
-import DashboardCardSentimentComparison from "../Components/DashboardCardSentimentComparison"
-import DashboardCardFearAndGreed from "../Components/DashboardCardFearAndGreed"
-import DashboardCardTweetVolumeSentiment from "../Components/DashboardCardTweetVolumeSentiment"
 import { useDashboard } from "../DashboardContext"
 import ModalChooseWidget from "../Components/ModalChooseWidget"
 import DashboardCardRecentTweets from "../Components/DashboardCardRecentTweets"
@@ -20,7 +12,7 @@ export default function DashboardView(props){
 
 
     const {widgetSetup,chooseWidgetModal,setModal}=useDashboard()
-    // console.log(chooseWidgetModal)
+    // console.log(widgetSetup)
 
     return(
         <div className="backgroundDefault">
@@ -58,7 +50,7 @@ export default function DashboardView(props){
                 <div className="row mt-4">
 
                     {
-                        widgetSetup.map((singleItem,index)=>(
+                        widgetSetup && widgetSetup.map((singleItem,index)=>(
                             <div className="col-lg-4" key={index}>
                                 <DashboardCardWidget singleItem={singleItem} index={index} />
                             </div>

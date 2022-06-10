@@ -1,6 +1,9 @@
 import React, {useContext, useState, useEffect} from "react"
 import presetWidget from "./userWidgtet"
 import fakeCoinInfoData from "./fakeCoinInfoData"
+import { useAuth } from "./AuthContext"
+import { createChart } from "lightweight-charts"
+
 const DashboardContext = React.createContext()
 
 export function useDashboard(){
@@ -8,6 +11,7 @@ export function useDashboard(){
 }
 
 export function DashboardProvider({children}){
+
 
 
     const dataTT = [{ twitter_volume: 0, trade_volume:2,  time: 1642425322 }, { twitter_volume: 8, trade_volume:3, time: 1642511722 }, { twitter_volume: 10,trade_volume:2, time: 1642598122 }, { twitter_volume: 20, trade_volume:24, time: 1642684522 }, { twitter_volume: 3, trade_volume:9, time: 1642770922 }, { twitter_volume: 43,trade_volume:54,  time: 1642857322 }, { twitter_volume: 41, trade_volume:51, time: 1642943722 }, { twitter_volume: 43,trade_volume:40, time: 1643030122 }, { twitter_volume: 56,trade_volume:50, time: 1643116522 }, { twitter_volume: 46, trade_volume:44, time: 1643202922 }];
@@ -117,7 +121,7 @@ export function DashboardProvider({children}){
   ]
 
     // const [isIndo,setIsIndo] =useState(true)
-    const [widgetSetup,setWidgetSetup]=useState(presetWidget)
+    const [widgetSetup,setWidgetSetup]=useState([])
     const [chooseWidgetModal,setChooseWidgetModal]=useState(false)
     const [selectedLocation,setSelectedLocation]=useState(null)
     const [activeWidget,setActiveWidget]=useState([])
@@ -134,25 +138,90 @@ export function DashboardProvider({children}){
     const [widgetCoinInfo_data,setWidgetCoinInfo_data]=useState([])
     const [widgetTweets_data,setWidgetTweets_data]=useState([])
 
+    const {user,isAuthenticated} = useAuth()
 
-    const arrayOfWidget=[widget1_data,widget3_data,widget4_data,widget5_data,widget6_data,widgetPrice_data,widgetCoinInfo_data,widgetTweets_data]
+    const domain = 'http://localhost:8000'
 
-    function submitAddWidget(selectedChoice){
+    async function submitAddWidget(selectedChoice){
         if (typeof selectedChoice === 'number' && isFinite(selectedChoice)){
             var tempArray = widgetSetup;
             tempArray[selectedLocation].id= "widget-"+selectedChoice
-            setWidgetSetup(tempArray)
-            updateActiveWidget()
-            setModal(false,null)
+            try{
+                const fetch = await updateWidgetSetup(tempArray)
+                setWidgetSetup(tempArray)
+                updateActiveWidget()
+                setModal(false,null)
+            }catch(err){
+                setModal(false,null)
+                return 
+            }
         }else return
             
     }
+
+    async function updateWidgetSetup(updatedArray){
+        if (!isAuthenticated) return 0
+        else{
+            const requestOptions = {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                  "auth-token": user.token,
+                },
+                body: JSON.stringify({widget:updatedArray})
+              }
+
+            try{
+                console.log(requestOptions.body)
+                const setWidget = await fetch(`${domain}/widget/set/${user.id}`,requestOptions)
+                const data =await setWidget.json()
+            }catch(err){
+                return 0
+            }
+        }
+    }
+
+    ///FETCHING THE WIDGET///
+    async function getWidgetSetup(){
+        if (!isAuthenticated){
+            console.log('not authenticated')
+            setWidgetSetup([{id:'none'},{id:'none'},{id:'none'}])
+        }
+        else {
+            const requestOptions = {
+                method: "GET",
+                headers: {
+                  "Content-Type": "application/json",
+                  "auth-token": user.token,
+                },
+              };
+            try{
+                const widget = await fetch(`${domain}/widget/get/${user.id}`,requestOptions)
+                const data = await widget.json()
+                if (data){
+                    console.log(data.data.widget)
+                    setWidgetSetup(data.data.widget)
+                }else 
+                    setWidgetSetup({id:'none'},{id:'none'},{id:'none'})
+            }catch (err) {
+                setWidgetSetup({id:'none'},{id:'none'},{id:'none'})
+                // handleLogOut();
+                // history("/login");
+              }   
+
+            }
+        }
+
+
     useEffect(()=>{
+        console.log('use effect')
+        getWidgetSetup()
         updateActiveWidget()
-    },[])
+    },[user])
 
     function updateActiveWidget(){
         var tempArray=widgetSetup.map(a=>a.id)
+        console.log(tempArray)
         setActiveWidget(tempArray)
 
     }
@@ -161,13 +230,18 @@ export function DashboardProvider({children}){
         setSelectedLocation(location)
         setChooseWidgetModal(command)
     }
-    function deleteWidget(location){
-        // console.log(widgetSetup)
+    async function deleteWidget(location){
         var tempArray = widgetSetup;
         tempArray[location].id= "none"
-        setWidgetSetup(tempArray)
-        updateActiveWidget()
-        setModal(false,null)
+        try{
+            const fetch = await updateWidgetSetup(tempArray)
+            setWidgetSetup(tempArray)
+            updateActiveWidget()
+            setModal(false,null)
+        }catch(err){
+            setModal(false,null)
+            return 
+        }
     }
 
     function getRecentTweet(){
@@ -182,19 +256,19 @@ export function DashboardProvider({children}){
         else return 'Extreme Fear'
     }
     
-    function getTimeArray(period){
-        var daysBackward=0
-        if (period==='weekly') daysBackward=6
-        if (period==='monthly') daysBackward=30
+        function getTimeArray(period){
+            var daysBackward=0
+            if (period==='weekly') daysBackward=6
+            if (period==='monthly') daysBackward=30
 
-        var d= new Date()
-        d.setDate(d.getDate()-daysBackward)
-        for(var arr=[],dt=new Date(d); dt<=new Date(); dt.setDate(dt.getDate()+1)){
-            arr.push(new Date(dt).toISOString().slice(0,10));
+            var d= new Date()
+            d.setDate(d.getDate()-daysBackward)
+            for(var arr=[],dt=new Date(d); dt<=new Date(); dt.setDate(dt.getDate()+1)){
+                arr.push(new Date(dt).toISOString().slice(0,10));
+            }
+            return arr
+            // getDaysArray(new Date(d), new Date())
         }
-        return arr
-        // getDaysArray(new Date(d), new Date())
-    }
 
     function getWidget1(period){
         const timeArray=getTimeArray(period)
@@ -209,24 +283,35 @@ export function DashboardProvider({children}){
     }
 
     function getWidget3(period){
-        
-        return [
-            {
-                coinName:'Bitcoin',
-                percentage:'30%',
-                numoftweets:Math.floor(Math.random()*2000)
-            
-            },{
-                coinName:'Ethereum',
-                percentage:'20%',
-                numoftweets:Math.floor(Math.random()*2000)
-            },{
-                coinName:'Binance',
-                percentage:'20%',
-                numoftweets:Math.floor(Math.random()*2000)
-            }
-        ]
+        var vartern=false
+        const promise1=new Promise(resolve=>{
+            setTimeout(()=>{
+                resolve(
+                     [
+                        {
+                            coinName:'Bitcoin',
+                            percentage:'30%',
+                            numoftweets:Math.floor(Math.random()*2000)
+                        
+                        },{
+                            coinName:'Ethereum',
+                            percentage:'20%',
+                            numoftweets:Math.floor(Math.random()*2000)
+                        },{
+                            coinName:'Binance',
+                            percentage:'20%',
+                            numoftweets:Math.floor(Math.random()*2000)
+                        }
+                    ]);
+            },1000);
+        })
+        promise1.then((value)=>{
+            vartern = value
+        })
+        return vartern
     }
+
+
     function getWidget6(){
         var arr=['Now','Yesterday','Last Week','Last Month']
         var arrReturn=[]
@@ -252,13 +337,15 @@ export function DashboardProvider({children}){
         return temp
     }
 
-    function refreshWidget(widgetType){
+    async function refreshWidget(widgetType){
         switch(widgetType){
             case 'widget-1':
-                return setWidget1_data(getWidget1('weekly'))
+                const datawidget= await fetch(`${domain}/getwidget/widget-1`)
+                const data = await datawidget.json();
+                setWidget1_data(data)
             case 'widget-2':
                 return []
-            case 'widget-3':
+            case 'w idget-3':
                 return setWidget3_data(getWidget3('weekly'))
             case 'widget-4':
                 return dataTT
@@ -271,47 +358,6 @@ export function DashboardProvider({children}){
         }
     }
 
-
-    // console.log(getWidget1('weekly'))
-
-    function getWidgetData(widgetType){
-        switch(widgetType){
-            case 'widget-1':
-                return getWidget1('weekly')
-            case 'widget-2':
-                return []
-            case 'widget-3':
-                return widget3Data
-            case 'widget-4':
-                return dataTT
-            case 'widget-5':
-                return dataCoinSentimentComparison
-            case 'widget-6':
-                return 0
-            default:
-                return <></>
-        }
-    }
-
-    function setWidgetData(widgetType){
-        switch(widgetType){
-            case 'widget-1':
-                return getWidget1('weekly')
-            case 'widget-2':
-                return []
-            case 'widget-3':
-                return widget3Data
-            case 'widget-4':
-                return dataTT
-            case 'widget-5':
-                return dataCoinSentimentComparison
-            case 'widget-6':
-                return 0
-            default:
-                return <></>
-        }
-
-    }
 
     function getCurrentCoin(){
         return activeCoin
@@ -346,11 +392,9 @@ export function DashboardProvider({children}){
         setModal,
         submitAddWidget,
         deleteWidget,
-        getWidgetData,
         getRecentTweet,
         getCurrentCoin,
         setCurrentCoin,
-        setWidgetData,
         getCoinDetail,
         activeCoinInfo,
         sentimentTest,

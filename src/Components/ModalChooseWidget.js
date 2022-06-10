@@ -43,7 +43,7 @@ export default function ModalChooseWidget(props) {
                   [1,2,3,4,5,6].map((singleNum,index)=>(
                       <div key={singleNum} onClick={()=>handleSelect(singleNum)} className="col-lg-4 mb-3">
                         {/* <div className="widgetImageModal"></div> */}
-                        <img className={`${activeWidget.includes(`widget-${singleNum}`) ? 'disabledModalpicture':''} img-fluid ${selectedChoice===singleNum ? 'widgetModalActivePic':''}`} src={`./img/previewWidget/widget-${singleNum}.png`} alt={widgetLibrary[`widget-${singleNum}`].title}/>
+                        <img className={`${activeWidget.includes(`widget-${singleNum}`) ? 'disabledModalpicture':''} img-fluid ${selectedChoice===singleNum ? 'widgetModalActivePic':''}`} src={`../img/previewWidget/widget-${singleNum}.png`} alt={widgetLibrary[`widget-${singleNum}`].title}/>
                         <p className={`widgetTextModal ${selectedChoice===singleNum && !activeWidget.includes(`widget-${singleNum}`) ? 'widgetModalActive':''}`}>{widgetLibrary[`widget-${singleNum}`].title}</p>
                       </div>
 

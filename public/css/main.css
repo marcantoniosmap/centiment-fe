@@ -10,9 +10,39 @@
     min-height: 72px;
     background-color: white;
     filter: drop-shadow(0px 3px 6px rgba(0, 0, 0, 0.288));
+    z-index: 1000;
 }
 
 a, a:hover, a:focus, a:active {
     text-decoration: none !important;
     color: inherit !important;
+}
+
+.navActive{
+    font-weight: 600;
+    color:#2467DB !important
+}
+
+.text-red{
+    color :#E35B5B
+}
+.text-green{
+    color:#0E8D5A
+}
+
+.overlay:before {
+    content: ' ';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+    background: #212529;
+    opacity: 0;
+    pointer-events: none;
+    transition: ease opacity 300ms 100ms;
+}
+.overlay{
+    position:relative
 }

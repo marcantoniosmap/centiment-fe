@@ -1,5 +1,5 @@
-import { useState } from "react"
 import { useDashboard } from "../DashboardContext"
+import DashboardCardLoading from "./DashboardCardLoading"
 
 export default function DashboardCardTrendingCoin(){
 
@@ -24,15 +24,19 @@ export default function DashboardCardTrendingCoin(){
         },
     ]
     return(
+        <>
+        {
+            !widget3_data ?  <DashboardCardLoading/> : 
+        
         <div className="w-100 h-100 pt-4">
             <div className="d-flex h-100 justify-content-center">
                 <div className="row w-100 align-items-end">
                     {
-                        detailsPosition.map((singleitem,index)=>(
+                        widget3_data && detailsPosition.map((singleitem,index)=>(
                             <div className="col-4 px-0" key={index}>
                                 <div className="floatingText d-flex justify-content-center text-center">
                                     <div className="pb-2">
-                                        <img className="mb-2"src={`./img/icon/${widget3_data[singleitem.pos-1].coinName}.png`} alt={widget3_data[singleitem.pos-1].coinName}/>
+                                        <img className="mb-2"src={`../img/icon/${widget3_data[singleitem.pos-1].coinName}.png`} alt={widget3_data[singleitem.pos-1].coinName}/>
                                         <p className="mb-0  trendingcoinTopText">{widget3_data[singleitem.pos-1].percentage} higher than usual</p>
                                         <p className="trendingcoinBottomText mb-1">{widget3_data[singleitem.pos-1].numoftweets} tweets today</p>
                                     </div>
@@ -44,12 +48,10 @@ export default function DashboardCardTrendingCoin(){
                                 </div>
                             </div>                        ))
                     }
-                        
-                  
                 </div>
-
             </div>
-            
         </div>
+}
+        </>
     )
 }
