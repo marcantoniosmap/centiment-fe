@@ -56,8 +56,8 @@ const history =useNavigate()
                         backgroundSize:'cover'
                         }}>
         </div>
-        <div className=" col-lg-6 d-flex justify-content-center align-items-center">
-          <div className="px-5" style={{minWidth:'500px'}}>
+        <div className="col-lg-6 d-flex justify-content-center align-items-center">
+          <div className="px-3" >
             <h1 className="text-center">
               <img src="/img/CentimentLogo.png" style={{ maxWidth: "200px" }} />
             </h1>
@@ -84,7 +84,7 @@ const history =useNavigate()
                 />
               </FormGroup>
                 </div>
-                <div className="col-lg-6 ps-0">
+                <div className="col-lg-6 ps-lg-0">
                 <FormGroup controlId="lastName" className="pt-3">
                 Last Name
                 <FormControl

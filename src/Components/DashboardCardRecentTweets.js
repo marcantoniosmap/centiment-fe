@@ -1,10 +1,10 @@
 import { useState } from "react"
 import { useDashboard } from "../DashboardContext"
+import DashboardCardLoading from "./DashboardCardLoading";
 
 export default function DashboardCardRecentTweets(){
 
-    const {getRecentTweet}=useDashboard()
-    const [recentTweets,setRecentTweets]=useState(getRecentTweet)
+    const {widgetTweets_data}=useDashboard()
 
     const colors = ['#00AA55', '#009FD4', '#B381B3', '#939393', '#E3BC00', '#D47500', '#DC2A2A'];
 
@@ -22,8 +22,11 @@ export default function DashboardCardRecentTweets(){
             
     return(
         <>
+        {
+            widgetTweets_data.length===0 ? <DashboardCardLoading/> :
+        
         <div className="scrollWrapper p-2 pt-3">
-        {recentTweets.map((singleItem,index)=>(
+        {widgetTweets_data.map((singleItem,index)=>(
             <div className="recentTweetWrapper" key={index}>
                 <a target='_blank' href={`https://twitter.com/${singleItem.twitterHandle}/status/${singleItem.id}`}>
                 <div className="d-flex justify-content-between">
@@ -51,6 +54,7 @@ export default function DashboardCardRecentTweets(){
             </div>
         ))}
         </div>
+        }
         </>
     )
 }

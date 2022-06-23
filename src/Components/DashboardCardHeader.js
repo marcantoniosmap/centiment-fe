@@ -2,12 +2,14 @@ import { useEffect, useState } from "react"
 import { CloseButton } from "react-bootstrap"
 import { useDashboard } from "../DashboardContext"
 import widgetLibrary from "../widgetLibrary"
+import ModalCoinInfo from "./ModalCoinInfo"
 
 export default function DashboardCardHeader({chartId,chartTitle,loc}){
 
     const [showSetting,setShowSetting]=useState(false)
+    const [showInfo,setShowInfo]=useState(false)
 
-    const {setModal,deleteWidget,refreshWidget}=useDashboard()
+    const {setModal,deleteWidget,refreshWidget,activeCoin}=useDashboard()
     
     function changeWidget(){
         setShowSetting(false)
@@ -18,21 +20,25 @@ export default function DashboardCardHeader({chartId,chartTitle,loc}){
     }   
     function handleRefresh(){
         setShowSetting(false)
-        refreshWidget(chartId)
+        refreshWidget(chartId,activeCoin)
     }
     function handleChangeTimeframe(){
         return 0
+    }
+    function handleInformation(){
+        setShowInfo(true)
+        setShowSetting(false)
     }
 
     const libraryFunction={
         "Refresh Data":handleRefresh,
         "Delete Widget":handleDelete,
         "Change Timeframe":handleChangeTimeframe,
-        "Change Widget":changeWidget
+        "Change Widget":changeWidget,
+        "Information":handleInformation
 
 
     }
-    const settingText=['Refresh','Edit Coin Option','Change Widget','Delete Widget','Information']
     return(
         <div className="dashboardCardHeader d-flex justify-content-between">
             <span className="dashboardCardTitle">{chartTitle}</span>
@@ -53,6 +59,11 @@ export default function DashboardCardHeader({chartId,chartTitle,loc}){
                     </g>
                 </svg>
             </div>
+            <ModalCoinInfo
+                show={showInfo}
+                onHide={()=>setShowInfo(false)}
+                chartId={chartId}
+                />
                 <div className={`settingpopup ${showSetting ? 'helo':'d-none'}`} >
                     <div className="d-flex flex-column justify-content-between h-100">
 

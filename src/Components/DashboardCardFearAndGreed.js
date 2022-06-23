@@ -1,5 +1,6 @@
 import ReactSpeedometer from "react-d3-speedometer"
 import { useDashboard } from "../DashboardContext"
+import DashboardCardLoading from "./DashboardCardLoading"
 
 export default function DashboardCardFearAndGreed(){
 
@@ -14,8 +15,14 @@ export default function DashboardCardFearAndGreed(){
     }
 
     return(
+        <>
+        
+        {
+            widget6_data.length===0 ? <DashboardCardLoading/> :
+        
+        
         <div className="w-100 h-100 row m-0">
-            <div className="col-lg-7 px-0 pt-3">
+            <div className="col-lg-7 col-12 px-0 pt-3">
             <ReactSpeedometer
                 value={widget6_data[0].score}
                 fluidWidth={true}
@@ -31,7 +38,7 @@ export default function DashboardCardFearAndGreed(){
                 maxSegmentLabels={0}
                 />
             </div>
-            <div className="col-lg-5">
+            <div className="col-lg-5 col-12">
                 <div className="d-flex flex-column">
                     {widget6_data.map((singleItem,index)=>(
                         <div key={index}>
@@ -51,5 +58,7 @@ export default function DashboardCardFearAndGreed(){
                 </div>
             </div>
         </div>
+}
+        </>
     )
 }

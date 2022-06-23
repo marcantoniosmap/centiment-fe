@@ -5,7 +5,7 @@ import { CloseButton, Container, Form, FormControl, Nav, Navbar, NavDropdown } f
 import { useNavigate } from "react-router";
 import { useAuth } from "../AuthContext";
 
-export default function NavbarCustom(){
+export default function NavbarCustom({setAlertModal}){
 
     const {user,isAuthenticated,logout}= useAuth()
     const history = useNavigate()
@@ -25,20 +25,16 @@ export default function NavbarCustom(){
         to:'/dashboard',
         text:'Dashboard'
       },
-      {
-        to:'/alerts',
-        text:'Alerts'
-      },
     ]
 
     function handleLogout(){
-      // history('/home')
       logout()
+      history('/home')
     }
 
     return(
       <>
-      <Navbar className="mainNavbar" bg="light" expand="lg">
+      <Navbar sticky="top" className="mainNavbar" bg="light" expand="lg">
         <Container>
           <Navbar.Brand href="/home"><img src="/img/CentimentLogoHorizontal.png" height={50}/></Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -47,20 +43,23 @@ export default function NavbarCustom(){
               {
                navigationList.map((singleItem)=>(
                  <Nav.Link key={singleItem.to} className={`px-4 ${('/'+location)===singleItem.to && 'navActive'}`} href={singleItem.to}>{singleItem.text}</Nav.Link>
-               )) 
+               ))
+               
               }
+                <Nav.Item className="px-4 py-lg-0 py-2" style={{cursor:'pointer'}} onClick={()=>setAlertModal(true)}>Alert</Nav.Item>
+
               {
                 isAuthenticated ? 
-                <div>
+                <div style={{position:'relative'}}>
                  <div 
                       onClick={()=>setShowSetting(true)}
                       style={{backgroundColor:user.profileColor}} 
-                      className="mx-4 tweeterAvatar d-flex justify-content-center align-items-center font-weight-bold text-white" >
-                    {user.name ?user.name[0].toUpperCase():'M'}
+                      className="mx-4 my-lg-0 my-2 tweeterAvatar d-flex justify-content-center align-items-center font-weight-bold text-white" >
+                    {user.name[0].toUpperCase()}
                   </div>
                   <div className={`settingpopup ${showSetting ? 'helo':'d-none'}`} >
                     <div className="d-flex flex-column justify-content-between h-100">
-                      <div className="settingpopupchild py-2" onClick={''}>
+                      <div className="settingpopupchild py-2">
                           <span className="px-3">Profile Setting</span>
                       </div>
                       <div className="settingpopupchild py-2" onClick={handleLogout}>
@@ -75,7 +74,7 @@ export default function NavbarCustom(){
                 </div>
                  :
                 <Nav.Item>
-              <Nav.Link href="/login"><btn className="btn btn-primary">Log In</btn></Nav.Link>
+              <Nav.Link href="/login"><button className="btn btn-primary">Log In</button></Nav.Link>
             </Nav.Item>
 
               }

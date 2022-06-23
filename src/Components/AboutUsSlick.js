@@ -49,7 +49,7 @@ export default function AboutUsSlick(){
         arrows:false,
         dots:true,
         slidesToScroll: 1,
-        autoplay:false,
+        autoplay:true,
         dotsClass: 'slick-dots button__bar',
         speed:1000,
         autoplaySpeed:8000,
@@ -59,24 +59,24 @@ export default function AboutUsSlick(){
         <>
         <div style={{height:'calc(100vh - 100px)', display:'block',width:'100%',position:'relative'}}>
             <Slider {...setting}>
-            {sliderContent.map((content)=>
-            <>
-                    <div class="overlay overlay-show overlay-op-7 pt-5" style={{backgroundImage:`url(${content.imageUrl})`,backgroundSize:'cover',backgroundPosition:'center',height:'calc(100vh - 100px', boxSizing:'border-box'}} key={content.Textline1}>
-                        <div class="container container-xl-custom pt-5 h-100">
-						    <div class="row align-items-center pt-5 h-100">
-							    <div class={`col `}>
+            {sliderContent.map((content,index)=>
+            <div key={index}>
+                    <div  className="overlay overlay-show overlay-op-7 pt-5" style={{backgroundImage:`url(${content.imageUrl})`,backgroundSize:'cover',backgroundPosition:'center',height:'calc(100vh - 100px', boxSizing:'border-box'}} >
+                        <div className="container container-xl-custom pt-5 h-100">
+						    <div className="row align-items-center pt-5 h-100">
+							    <div className={`col `}>
                                     {
                                         content.additional ?
                                          content.additional :
                                          <>
-                                        <h1 class="text-white text-8 text-lg-12 line-height-2 mb-2">
+                                        <h1 className="text-white text-8 text-lg-12 line-height-2 mb-2">
                                             <span>{content.Textline1}<br/> 
                                                 <span style={{fontWeight:600}}>{content.Textline2}</span>
                                             </span>
                                         </h1>
-								        <p class="text-4 text-white text-lg-4-5 font-weight-light opacity-9 mb-4  " style={{maxWidth:'700px'}} >{content.Paragraph}</p>
+								        <p className="text-4 text-white text-lg-4-5 font-weight-light opacity-9 mb-4  " style={{maxWidth:'700px'}} >{content.Paragraph}</p>
                                     {   
-                                         content.CTA &&<Link to={content.CTAlink} class="btn btn-primary btn-modern font-weight-bold text-white text-3 py-3 btn-px-5 mt-2">{content.CTA}<i class="fas fa-arrow-right ms-2"></i></Link>
+                                         content.CTA &&<Link to={content.CTAlink} className="btn btn-primary btn-modern font-weight-bold text-white text-3 py-3 btn-px-5 mt-2">{content.CTA}<i className="fas fa-arrow-right ms-2"></i></Link>
                                     }
                                     </>
                                     }
@@ -84,7 +84,7 @@ export default function AboutUsSlick(){
 						    </div>
 					    </div>
 					</div>
-                    </>
+                    </div>
         )}
 
             </Slider>

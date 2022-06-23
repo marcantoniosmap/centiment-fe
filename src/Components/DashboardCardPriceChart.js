@@ -1,8 +1,11 @@
 import { createChart,ColorType } from "lightweight-charts"
 import { useRef, useEffect } from "react";
 import { ma } from "moving-averages";
+import { useDashboard } from "../DashboardContext";
 
-export default function DashboardCardPriceChart({data}){
+export default function DashboardCardPriceChart(){
+
+	const {widgetPrice_data}=useDashboard()
 	
 	const backgroundColor = 'white'
 	const lineColor = '#2962FF'
@@ -27,7 +30,7 @@ export default function DashboardCardPriceChart({data}){
 
         return outputArray
     }
-        
+
 
 	const chartContainerRef = useRef();
 
@@ -43,16 +46,16 @@ export default function DashboardCardPriceChart({data}){
 					textColor,
 				},
 				width: chartContainerRef.current.clientWidth,
-				height: 500,
+				height: 480,
 
 			});
 			chart.timeScale().fitContent();
 
 			const newSeries = chart.addCandlestickSeries();
-			newSeries.setData(data);
+			newSeries.setData(widgetPrice_data);
 
             const movingAverage = chart.addLineSeries({color:'#BFE3C0', lineWidth:'1'});
-            movingAverage.setData(getMovingAverage(data,20))
+            movingAverage.setData(getMovingAverage(widgetPrice_data,20))
             chart.priceScale(movingAverage)
 
 			window.addEventListener('resize', handleResize);
@@ -63,7 +66,7 @@ export default function DashboardCardPriceChart({data}){
 				chart.remove();
 			};
 		},
-		[data, backgroundColor, lineColor, textColor, areaTopColor, areaBottomColor]
+		[widgetPrice_data, backgroundColor, lineColor, textColor, areaTopColor, areaBottomColor]
 	);
 
 	return (

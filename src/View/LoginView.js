@@ -9,11 +9,10 @@ import ModalSuccessRegister from "../Components/ModalSuccessRegister";
 export default function LoginView(){
 
 
-const {login,setAuth,setUser} = useAuth()
+const {login,setAuth} = useAuth()
 const history =useNavigate()
     
   const registerLanding=window.location.pathname.length>6
-  console.log(registerLanding)
   const [registerModal,setRegisterModal]=useState(window.location.pathname.length>6)
   const [email, setEmail] = useState(window.location.pathname.substring(7));
   const [password, setPassword] = useState("");
@@ -28,12 +27,11 @@ const history =useNavigate()
   async function handleSubmit(event) {
     event.preventDefault();
     const loginResult = await login({email:email,password:password})
-    if (loginResult){
+    if (loginResult.data==='ok'){
         setAuth(true)
-        setUser(loginResult)
-        history('/dashboard')
+        history('/home')
     }else{
-        console.log('cannot enter')
+        console.log(loginResult.msg)
     }
     
   }
@@ -50,7 +48,7 @@ const history =useNavigate()
                         }}>
         </div>
         <div className=" col-lg-6 d-flex justify-content-center align-items-center">
-          <div className="px-5" style={{minWidth:'500px'}}>
+          <div className="px-3" >
             <h1 className="text-center">
               <img src="/img/CentimentLogo.png" style={{ maxWidth: "200px" }} />
             </h1>
@@ -76,7 +74,7 @@ const history =useNavigate()
               <div className="mt-1" style={{textAlign:'right',fontSize:'0.8rem'}}>
               <span className="text-muted"><Link to="forgetpass">Forget Password?</Link></span>
               </div>
-              <button className="btn btn-primary w-100 mt-3" block disabled={!validateForm()} type="submit">
+              <button className="btn btn-primary w-100 mt-3" block="true" disabled={!validateForm()} type="submit">
                 Login
               </button>
             </form>

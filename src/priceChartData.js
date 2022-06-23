@@ -1,8 +1,6 @@
 var priceChartData=
 [
   
-  
-  
   {
     time: "3/15/2021",
     open: 59037.11,

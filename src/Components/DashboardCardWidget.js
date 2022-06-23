@@ -32,7 +32,7 @@ export default function DashboardCardWidget({singleItem,index}){
         }
     }
     return(
-        <div className="dashboardCard d-flex flex-column">
+        <div className="dashboardCard dashboardCardWidget d-flex flex-column ">
              {singleItem.id!=='none' && 
                 <DashboardCardHeader 
                     loc={index} 

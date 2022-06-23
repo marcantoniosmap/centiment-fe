@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="60" height="60" viewBox="0 0 60 60">
+  <defs>
+    <clipPath id="clip-Artboard_30">
+      <rect width="60" height="60"/>
+    </clipPath>
+  </defs>
+  <g id="Artboard_30" data-name="Artboard – 30" clip-path="url(#clip-Artboard_30)">
+    <path id="Icon_material-loop" data-name="Icon material-loop" d="M21.586,7.345V1.5L13.793,9.293l7.793,7.793V11.241A11.7,11.7,0,0,1,33.275,22.931a11.437,11.437,0,0,1-1.364,5.455l2.844,2.844A15.559,15.559,0,0,0,21.586,7.345Zm0,27.275A11.7,11.7,0,0,1,9.9,22.931a11.437,11.437,0,0,1,1.364-5.455L8.416,14.631a15.559,15.559,0,0,0,13.17,23.885v5.845l7.793-7.793-7.793-7.793Z" transform="translate(-0.652 37.229) rotate(-60)" fill="#fff"/>
+  </g>
+</svg>

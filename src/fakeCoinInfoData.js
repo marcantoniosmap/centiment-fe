@@ -5,7 +5,7 @@ var fakeCoinInfoData={
         price:47323.62,
         priceDiff:-0.42,
         volume:31479323826,
-        volumeDiff:-2,
+        volumeDiff:2,
         sentiment:41,
         sentimentDiff:-2,
         tweetCount:45500,

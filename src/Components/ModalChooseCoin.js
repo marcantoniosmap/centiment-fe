@@ -1,10 +1,13 @@
 import { useState } from "react";
 import { Modal,Button} from "react-bootstrap";
+import { useNavigate } from "react-router";
 import { useDashboard } from "../DashboardContext";
 import widgetLibrary from "../widgetLibrary";
 
 export default function ModalChooseCoin({show,handleCloseModal}) {
 
+
+    const history = useNavigate()
   
     const coinOption=['Bitcoin','Ethereum','Binance','Ripple','Cardano','Solana','Dogecoin']
 
@@ -13,6 +16,7 @@ export default function ModalChooseCoin({show,handleCloseModal}) {
     const currentCoinContext= getCurrentCoin()
 
     function handleSubmit(){
+      history(`/dashboard/${selectedChoice}`)
       setCurrentCoin(selectedChoice)
       handleClose()
     }
@@ -46,7 +50,7 @@ export default function ModalChooseCoin({show,handleCloseModal}) {
                   coinOption.map((singleCoin,index)=>(
                       <div key={singleCoin} onClick={()=>handleSelect(singleCoin)} className="col-lg-4 mb-3" style={{position:'relative'}}>
                         {/* <div className="widgetImageModal"></div> */}
-                        <img className={`${singleCoin===currentCoinContext ? 'disabledModalpicture':''} img-fluid ${selectedChoice===singleCoin ? 'widgetModalActivePic':''}`} src={`./img/coinCard/${singleCoin}.png`} alt={singleCoin}/>
+                        <img className={`${singleCoin===currentCoinContext ? 'disabledModalpicture':''} img-fluid ${selectedChoice===singleCoin ? 'widgetModalActivePic':''}`} src={`../img/coinCard/${singleCoin}.png`} alt={singleCoin}/>
                         <p className={`widgetTextModal ${selectedChoice===singleCoin? 'widgetModalActive':''} ${currentCoinContext===singleCoin && 'text-muted'}`}>{singleCoin}</p>
                         {
                           currentCoinContext===singleCoin&&

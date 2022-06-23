@@ -6,11 +6,11 @@ export default function Footer(){
       <div className="w-100" style={{backgroundColor:'#282E39'}}>
           <div className="container py-5">
           <div className="row">
-              <div className="col-3 px-2">
+              <div className="col-lg-3 d-none d-lg-block px-2">
                 <img className="img-fluid" src="../img/centimentLogo-white.png"/>
               </div>
 
-              <div className="col-2 ps-5">
+              <div className="col-lg-2 col-12 ps-5">
                 <div className="d-flex flex-column h-100 text-white">
                   <h6 className="font-weight-bold pb-2">USEFUL LINKS</h6>
                   <Link className="py-2"to="/">Home</Link>
@@ -21,13 +21,13 @@ export default function Footer(){
 
                 </div>
               </div>
-              <div className="col-4 text-white">
+              <div className="col-lg-4 d-none d-lg-block text-white">
                 <h6 className="font-weight-bold pb-1">ABOUT CENTIMENT</h6>
                 <p className="opacity-75" style={{fontSize:'0.9rem',textAlign:'justify'}}>Centiment is a web application that integrate market sentiment formed in the Twitter to the existing price chart used in technical analysis. It manufacture a continuous data pipeline present it as a modern graph and charts through widgets.</p>
                 <Link className="" to='/aboutus'>{'LEARN MORE >'}</Link>
               </div>
            
-              <div className="col-3 ps-5">
+              <div className="col-lg-3 col-12 ps-5 pt-lg-0 pt-5">
                 <div className="d-flex flex-column h-100 text-white">
                   <h6 className="font-weight-bold pb-2">CONTACTS</h6>
                   <div className="mb-2">

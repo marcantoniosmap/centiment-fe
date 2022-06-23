@@ -1,11 +1,7 @@
-import { useState } from "react";
-import { Modal,Button} from "react-bootstrap";
-import { useDashboard } from "../DashboardContext";
-import widgetLibrary from "../widgetLibrary";
+import { Modal} from "react-bootstrap";
+
 
 export default function ModalSuccessRegister({show,onHide,email}) {
-
-    const [selectedChoice,setSelectedChoice]=useState(null)
 
     return (
       <Modal

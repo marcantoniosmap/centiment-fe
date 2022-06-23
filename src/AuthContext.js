@@ -7,7 +7,7 @@ export function useAuth(){
 
 export function AuthProvider({children}){
 
-    const domain = 'http://localhost:8000'
+    const domain = 'https://rsvp.marcantonioapp.com'
     const [user,setUser]=useState({})
     const [isAuthenticated,setIsAuthenticated]=useState(false)
    
@@ -39,15 +39,14 @@ export function AuthProvider({children}){
                 "login",
                 JSON.stringify(userObject)
               );
-              return (userObject)
+              return ({data:'ok',msg:''})
       
             } else {
               const data = await response.json();
-              console.log(data);
-              return(false);
+              return({data:'err',msg:data});
             }
           } catch (err) {
-            return(false);
+            return({data:'err',msg:'err'});
           }
     }
 
@@ -87,20 +86,12 @@ export function AuthProvider({children}){
         if (localStorage.getItem("login")){
             setUser({
                 login:true,
+                token:tempToken.token,
                 id:tempToken.id,
                 name:tempToken.name,
                 email:tempToken.email,
                 profileColor:tempToken.profileColor,
-                token:tempToken.token
             })
-            console.log('on Use Effect',{
-              login:true,
-              id:tempToken.id,
-              name:tempToken.name,
-              email:tempToken.email,
-              profileColor:tempToken.profileColor,
-              token:tempToken.token
-          })
             setIsAuthenticated(true)
         }else {
             setUser({})
@@ -115,8 +106,13 @@ export function AuthProvider({children}){
       setIsAuthenticated(param)
     }
 
+    function getUser(){
+      return user
+    }
+
     const value ={
         user,
+        getUser,
         setUser,
         setAuth,
         isAuthenticated,

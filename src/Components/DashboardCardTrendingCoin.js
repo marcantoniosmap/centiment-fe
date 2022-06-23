@@ -26,7 +26,7 @@ export default function DashboardCardTrendingCoin(){
     return(
         <>
         {
-            !widget3_data ?  <DashboardCardLoading/> : 
+            widget3_data.length===0 ?  <DashboardCardLoading/> : 
         
         <div className="w-100 h-100 pt-4">
             <div className="d-flex h-100 justify-content-center">
