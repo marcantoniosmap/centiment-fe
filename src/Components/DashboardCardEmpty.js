@@ -3,7 +3,8 @@ import { useDashboard } from "../DashboardContext"
 
 export default function DashboardCardEmpty({loc}){
 
-    const {isAuthenticated,setModal,setLoginModalFunc}=useAuth()
+    const {isAuthenticated,setLoginModalFunc}=useAuth()
+    const {setModal}=useDashboard()
 
     function handleAddWidget(){
         if (isAuthenticated){

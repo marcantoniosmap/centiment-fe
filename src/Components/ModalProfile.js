@@ -47,6 +47,7 @@ export default function ModalProfile({show,onHide}) {
       try{
         const result = await updatePassword({oldPassword:oldPassword,newPassword:newPassword})
         if (result.status){
+          console.log(result.status)
           setAlertMessage(['success','You have changed your password!'])
           setShowMessage(true)
         }

@@ -118,8 +118,11 @@ export function AuthProvider({children}){
           requestOptions
         );
           const data = await response.json();
-          console.log(data)
-          return ({status:'ok'})
+          if (data.status==='ok'){
+            return ({status:'ok'})
+          }else{
+            return ({status:'err'})
+          }
       
       }catch (err) {
           return({data:'err'});
