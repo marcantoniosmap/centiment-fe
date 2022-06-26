@@ -38,7 +38,7 @@ export default function ModalAlert({show,onHide}) {
       const response = await fetch(`${domain}/alert/delete/${id}`,requestOptions);
       if (response.ok){
         const data = await response.json();
-        setAlertInfo(['primary','Your Alert has been deleted!'])
+        setAlertInfo(['success','Your Alert has been deleted!'])
         var myArray = alertList.filter(function( obj ) {
           return obj._id !== id;
       })

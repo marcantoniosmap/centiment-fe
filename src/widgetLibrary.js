@@ -2,7 +2,7 @@ var widgetLibrary={
     'priceChart':{
         id:'priceChart',
         title:'Coin Price Chart',
-        activities:['Refresh Data','Information'],
+        activities:['Refresh Data','Change Timeframe','Information'],
         simpleExplanation:'indicates the movement of Coin Price in conventional candlestick format',
         completeExplanation:<>
             <p>Coin Price chart is exactly the same chart you use in a conventional candlestick format, the purpose is to <b>visualize price movement.</b></p>

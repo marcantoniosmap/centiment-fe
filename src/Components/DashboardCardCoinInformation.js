@@ -1,4 +1,5 @@
 import { useDebugValue, useEffect, useState } from "react"
+import { useAuth } from "../AuthContext"
 import { useDashboard } from "../DashboardContext"
 import DashboardCardLoading from "./DashboardCardLoading"
 import ModalChooseCoin from "./ModalChooseCoin"
@@ -7,8 +8,17 @@ import TopArrow from "./TopArrow"
 export default function DashboardCardCoinInformation(){
 
     const [modalOpen,setModalOpen]=useState(false)
-    const {widgetCoinInfo_data}=useDashboard()
+    const {widgetCoinInfo_data,setLoginModalFunc }=useDashboard()
+    const {isAuthenticated}=useAuth()
 
+    function handleChangeCoin(){
+        if (isAuthenticated){
+            setModalOpen(true)
+        }
+        else{
+            setLoginModalFunc(true)
+        }
+    }
     useEffect(()=>{
     },[])
 
@@ -27,7 +37,7 @@ export default function DashboardCardCoinInformation(){
                         <span className="infoTicker m-0">{widgetCoinInfo_data.ticker}</span>
                     </div>
                     <div className="align-items-center d-flex">
-                        <button className="mt-3 btn btn-outline-primary btn-sm" onClick={()=>setModalOpen(true)}>Change Coin</button>
+                        <button className="mt-3 btn btn-outline-primary btn-sm" onClick={handleChangeCoin}>Change Coin</button>
                     </div>
 
                 </div>

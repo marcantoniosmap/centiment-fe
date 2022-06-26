@@ -1,9 +1,8 @@
-import { Button } from "bootstrap";
-import { Offcanvas } from "bootstrap";
 import { useState } from "react";
 import { CloseButton, Container, Form, FormControl, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { useNavigate } from "react-router";
 import { useAuth } from "../AuthContext";
+import ModalProfile from "./ModalProfile";
 
 export default function NavbarCustom({setAlertModal}){
 
@@ -11,6 +10,7 @@ export default function NavbarCustom({setAlertModal}){
     const history = useNavigate()
 
     const [showSetting,setShowSetting]=useState(false)
+    const [showProfile,setShowProfile]=useState(false)
     const location = window.location.pathname.split('/')[1]
     const navigationList=[
       {
@@ -35,6 +35,9 @@ export default function NavbarCustom({setAlertModal}){
     return(
       <>
       <Navbar sticky="top" className="mainNavbar" bg="light" expand="lg">
+
+        <ModalProfile show={showProfile} onHide={()=>setShowProfile(false)}/>
+
         <Container>
           <Navbar.Brand href="/home"><img src="/img/CentimentLogoHorizontal.png" height={50}/></Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -59,7 +62,7 @@ export default function NavbarCustom({setAlertModal}){
                   </div>
                   <div className={`settingpopup ${showSetting ? 'helo':'d-none'}`} >
                     <div className="d-flex flex-column justify-content-between h-100">
-                      <div className="settingpopupchild py-2">
+                      <div className="settingpopupchild py-2" onClick={()=>setShowProfile(true)}>
                           <span className="px-3">Profile Setting</span>
                       </div>
                       <div className="settingpopupchild py-2" onClick={handleLogout}>

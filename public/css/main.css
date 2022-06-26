@@ -149,3 +149,8 @@ a, a:hover, a:focus, a:active {
         height:50%;
     }
     }
+.border-selected{
+    border-color: #2467DB;
+    border-width: 5px;
+    border-style: solid;
+}

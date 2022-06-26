@@ -25,7 +25,7 @@ export default function HomeWidgetSlider(){
     autoplay:true,
     speed:1000,
     autoplaySpeed:8000,
-    adaptiveHeight: true,
+    adaptiveHeight: false,
     responsive: [
       {
         breakpoint: 1024,

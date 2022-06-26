@@ -20,6 +20,10 @@ export default function AboutUsAccordion(){
         {
             question: 'How does Centiment filtered bots?',
             content:<>Centiment uses multiple algorithm to solve this issue, firstly with identifying the user, how much followers, tweets it haves, and other few parameters. Secondly, it identifies keywords in the tweet itself, whether it contains word or phrases that are likely bot, such as "win it","click the link in our bio". The combination between the two steps are done to make sure users can receive the best overall experience in our platform. </>
+        },
+        {
+            question: 'How does the Alert work?',
+            content:<>Our alert is a simple to use service that only takes a few parameter. Once there is a data update on the backend, our system will recognize that it matches with the condition set and send you <b>an email</b> containing the detail of the alert you made. </>
         }
         
     ]

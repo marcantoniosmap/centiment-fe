@@ -9,6 +9,7 @@ import DashboardCard from "../Components/DashboardCard"
 import DashboardCardWidget from "../Components/DashboardCardWidget"
 import { useEffect, useState } from "react"
 import fakeCoinInfoData from "../fakeCoinInfoData"
+import ModalLogin from "../Components/ModalLogin"
 // import TweetEmbed from "react-tweet-embed"
 export default function DashboardView(props){
 

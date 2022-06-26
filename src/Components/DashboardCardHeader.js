@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { CloseButton } from "react-bootstrap"
+import { useAuth } from "../AuthContext"
 import { useDashboard } from "../DashboardContext"
 import widgetLibrary from "../widgetLibrary"
 import ModalCoinInfo from "./ModalCoinInfo"
@@ -9,25 +10,47 @@ export default function DashboardCardHeader({chartId,chartTitle,loc}){
     const [showSetting,setShowSetting]=useState(false)
     const [showInfo,setShowInfo]=useState(false)
 
-    const {setModal,deleteWidget,refreshWidget,activeCoin}=useDashboard()
+    const {isAuthenticated,setModal,setLoginModalFunc}=useAuth()
+    const {deleteWidget,refreshWidget,activeCoin}=useDashboard()
     
     function changeWidget(){
-        setShowSetting(false)
-        setModal(true,loc)
+        if(isAuthenticated){
+            setShowSetting(false)
+            setModal(true,loc)
+        }
+        else{
+            setLoginModalFunc(true)
+        }
     }
     function handleDelete(){
-        deleteWidget(loc)
+        if (isAuthenticated){
+            deleteWidget(loc)
+        }else{
+            setLoginModalFunc(true)
+        }
     }   
     function handleRefresh(){
-        setShowSetting(false)
-        refreshWidget(chartId,activeCoin)
+        if (isAuthenticated){
+            setShowSetting(false)
+            refreshWidget(chartId,activeCoin)
+        }else{
+            setLoginModalFunc(true)
+        }
     }
     function handleChangeTimeframe(){
-        return 0
+        if (isAuthenticated){
+           console.log('nothing to see')
+        }else{
+            setLoginModalFunc(true)
+        }
     }
     function handleInformation(){
-        setShowInfo(true)
-        setShowSetting(false)
+        if (isAuthenticated){
+            setShowInfo(true)
+            setShowSetting(false)
+        }else{
+            setLoginModalFunc(true)
+        }
     }
 
     const libraryFunction={

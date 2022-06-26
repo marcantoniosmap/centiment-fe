@@ -243,10 +243,9 @@ export function DashboardProvider({children}){
         deleteWidget,
         getCurrentCoin,
         setCurrentCoin,
-        // activeCoinInfo,
         sentimentTest,
         setActiveCoin,
-        // setActiveCoinInfo,
+        refreshWidget,
 
         widget1_data,
         widget3_data,
@@ -256,7 +255,6 @@ export function DashboardProvider({children}){
         widgetPrice_data,
         widgetCoinInfo_data,
         widgetTweets_data,
-        refreshWidget,
         readyTorender
     }
 

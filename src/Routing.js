@@ -2,7 +2,6 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Switch,
   Navigate
 } from "react-router-dom";
 // import 'bootstrap/dist/css/bootstrap.min.css';
@@ -16,18 +15,27 @@ import AboutUsView from "./View/AboutUsView";
 import DashboardWrapper from "./Components/DashboardWrapper";
 import ModalAlert from "./Components/ModalAlert";
 import { useState } from "react";
+import ResetPassView from "./View/ResetPassView";
+import Page404 from "./View/Page404";
+import ModalLogin from "./Components/ModalLogin";
+import { useAuth } from "./AuthContext";
 
 export default function Routing() {
   const [alertModal,setAlertModal]=useState(false)
+  const {isAuthenticated,setLoginModalFunc}=useAuth()
 
   function setAlertModalFunction(param){
-    setAlertModal(param)
+    if (isAuthenticated){
+      setAlertModal(param)
+    }else{
+      setLoginModalFunc(true)
+    }
   }
   return (
     <>
       <Router>
         <Routes>
-        <Route path="/" element={<Navigate to="/home" />} />
+        <Route path="/" exact element={<Navigate to="/home" />} />
           <Route 
             exact
             path='/dashboard'
@@ -64,10 +72,27 @@ export default function Routing() {
             path='/aboutus'
             element={<><NavbarCustom setAlertModal={setAlertModalFunction}/><AboutUsView/><Footer/></>}
           />
+
+            <Route
+            exact
+            path='/resetpass/:id/:validate'
+            element={<ResetPassView/>}
+          />
+          <Route
+            exact
+            path="/pagenotfound"
+            element={<><NavbarCustom setAlertModal={setAlertModalFunction}/><Page404/><Footer/></>}
+          />
+          <Route
+            path="*"
+            element={<Navigate to='/pagenotfound' replace/>}
+          />
           
           </Routes>
 
             <ModalAlert show={alertModal} onHide={(()=>setAlertModal(false))}/>
+            <ModalLogin/>
+
           
             
         </Router>

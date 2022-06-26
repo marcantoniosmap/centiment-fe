@@ -1,3 +1,4 @@
+import { Alert } from "react-bootstrap";
 import { useState } from "react";
 import { FormControl, FormGroup } from "react-bootstrap";
 import { useNavigate } from 'react-router-dom';
@@ -16,6 +17,7 @@ const history =useNavigate()
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordMatch,setPasswordMatch]=useState(0)
   const [errorMessage, setErrorMessage] = useState(false);
+  const [alertShow,setAlertShow]=useState(false)
 
   function validateForm() {
     return firstName.length > 2 && email.length > 6 && password.length > 6 && (password===confirmPassword);
@@ -24,11 +26,19 @@ const history =useNavigate()
 
   async function handleSubmit(event) {
     event.preventDefault();
-    const RegisterResult = await register({email:email,name:firstName+' '+lastName,password:password })
-    if (RegisterResult){
+    
+    try{
+      const RegisterResult = await register({email:email,name:firstName+' '+lastName,password:password })
+    if (RegisterResult.status==='ok'){
         history(`/login/${email}`)
-    }else{
-        console.log('cannot enter')
+    }
+    else{
+      setErrorMessage(RegisterResult.msg)
+      setAlertShow(true)
+    }
+  }catch(e){
+      console.log('here')
+      setErrorMessage('Failed to Make an Account')
     }
   }
 
@@ -57,7 +67,11 @@ const history =useNavigate()
                         }}>
         </div>
         <div className="col-lg-6 d-flex justify-content-center align-items-center">
+        
           <div className="px-3" >
+          <Alert variant='danger'show={alertShow} onClose={()=>setAlertShow(false)} dismissible>
+          {errorMessage}
+        </Alert>
             <h1 className="text-center">
               <img src="/img/CentimentLogo.png" style={{ maxWidth: "200px" }} />
             </h1>
@@ -115,7 +129,7 @@ const history =useNavigate()
               </FormGroup>
               <div className="pt-1">
                 <span className={passwordMatch===0 ? 'd-none': passwordMatch===1 ? 'text-green' : 'text-red'} >{passwordMatch===1 ?'Password matches':'Password does not match'}</span>
-                
+
               </div>
               <div className="mt-1" style={{textAlign:'right',fontSize:'0.8rem'}}>
               </div>

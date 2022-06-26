@@ -14,10 +14,9 @@ export default function Footer(){
                 <div className="d-flex flex-column h-100 text-white">
                   <h6 className="font-weight-bold pb-2">USEFUL LINKS</h6>
                   <Link className="py-2"to="/">Home</Link>
-                  <Link className="py-2"to="/">About Us</Link>
-                  <Link className="py-2"to="/">Dashboard</Link>
-                  <Link className="py-2"to="/">Alert</Link>
-                  <Link className="py-2"to="/">Profile</Link>
+                  <Link className="py-2"to="/aboutus">About Us</Link>
+                  <Link className="py-2"to="/dashboard">Dashboard</Link>
+                  <Link className="py-2"to="/login">Login</Link>
 
                 </div>
               </div>

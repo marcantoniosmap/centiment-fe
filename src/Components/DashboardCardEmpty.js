@@ -1,14 +1,22 @@
+import { useAuth } from "../AuthContext"
 import { useDashboard } from "../DashboardContext"
 
 export default function DashboardCardEmpty({loc}){
 
-    const {setModal}=useDashboard()
+    const {isAuthenticated,setModal,setLoginModalFunc}=useAuth()
 
-    // console.log(loc)
+    function handleAddWidget(){
+        if (isAuthenticated){
+            setModal(true,loc)
+        }
+        else{
+            setLoginModalFunc(true)
+        }
+    }
 
 
     return(
-        <div className="emptyOuterWrapper" onClick={()=>setModal(true,loc)}>
+        <div className="emptyOuterWrapper" onClick={handleAddWidget}>
             <div className="dashboardCardEmptyOuter d-flex justify-content-center align-items-center">
                 <div>
                     <div className="d-flex justify-content-center h-100">
