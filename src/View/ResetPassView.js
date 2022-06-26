@@ -25,7 +25,6 @@ const history =useNavigate()
     event.preventDefault();
     const id = window.location.pathname.split('/')[2]
     const validate = window.location.pathname.split('/')[3]
-    console.log(id,validate)
 
       try{
       const loginResult = await resetPass({password:password,user_id:id,validate:validate})
@@ -88,7 +87,7 @@ const history =useNavigate()
               </button>
             </form>
              <div className="mt-2 text-center">
-                <span className="text-muted">Back to <Link to="/register" className="text-primary">Home   </Link>Page</span>
+                <span className="text-muted">Back to <Link to="/home" className="text-primary">Home</Link>Page</span>
              </div>
             
           </div>
