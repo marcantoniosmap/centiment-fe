@@ -1,17 +1,26 @@
 import { useState } from "react";
 import { Modal} from "react-bootstrap";
 import { useDashboard } from "../DashboardContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../AuthContext";
 
 
 export default function ModalLogin(props) {
 
     const {loginModal, setLoginModalFunc}=useAuth()
+    const history=useNavigate()
 
 
     function handleClose(){
       setLoginModalFunc(false)
+    }
+    function toLogin(){
+      setLoginModalFunc(false)
+      history('/login')
+    }
+    function toRegister(){
+      setLoginModalFunc(false)
+      history('/register')
     }
 
     return (
@@ -40,11 +49,11 @@ export default function ModalLogin(props) {
               <p>By being authenticated, you would be able to save widget configuration, and create the dashboard you desire!</p>
               <div className="row">
                 <div className="col-lg-6 ">
-                <button className="btn btn-light w-100"><Link to="/login">Log In</Link></button>
+                <button className="btn btn-light w-100" onClick={toLogin}>Log In</button>
 
                 </div>
                 <div className="col-lg-6 ps-0">
-              <button className="btn btn-primary w-100"><Link to="/register">Register</Link></button>
+              <button className="btn btn-primary w-100"onClick={toRegister}>Register</button>
 
                 </div>
               </div>

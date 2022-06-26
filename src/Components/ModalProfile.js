@@ -46,9 +46,12 @@ export default function ModalProfile({show,onHide}) {
 
       try{
         const result = await updatePassword({oldPassword:oldPassword,newPassword:newPassword})
-        if (result.status){
+        if (result.status==='ok'){
           console.log(result.status)
           setAlertMessage(['success','You have changed your password!'])
+          setShowMessage(true)
+        }else{
+          setAlertMessage(['danger','Current password is not right!'])
           setShowMessage(true)
         }
       }catch(e){
@@ -150,7 +153,7 @@ export default function ModalProfile({show,onHide}) {
               />
             </FormGroup>
             <div className="mt-1" style={{textAlign:'right',fontSize:'0.8rem'}}>
-            <button className="btn btn-primary w-100 mt-3" disabled={permanentDisable|| !name} type="submit">
+            <button className="btn btn-primary w-100 mt-3" disabled={permanentDisable|| !name || (name===user.name && color===user.profileColor)} type="submit">
               Update Data
             </button>
             </div>

@@ -10,8 +10,8 @@ export default function DashboardCardHeader({chartId,chartTitle,loc}){
     const [showSetting,setShowSetting]=useState(false)
     const [showInfo,setShowInfo]=useState(false)
 
-    const {isAuthenticated,setModal,setLoginModalFunc}=useAuth()
-    const {deleteWidget,refreshWidget,activeCoin}=useDashboard()
+    const {isAuthenticated,setLoginModalFunc}=useAuth()
+    const {deleteWidget,setModal,refreshWidget,activeCoin}=useDashboard()
     
     function changeWidget(){
         if(isAuthenticated){
