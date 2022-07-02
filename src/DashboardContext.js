@@ -239,7 +239,8 @@ export function DashboardProvider({children}){
                                 low:singleItem.low_price,
                             })
                         })
-                        setWIdgetPrice_data(tempvar)
+                        console.log(tempvar[0])
+                        setWIdgetPrice_data(tempvar.slice(1,tempvar.length-1))
                         break
                     case 'coinInfo':
                         setWidgetCoinInfo_data(fetchResult.payload)
