@@ -6,11 +6,6 @@ export default function DashboardCardRecentTweets(){
 
     const {widgetTweets_data}=useDashboard()
 
-    const colors = ['#00AA55', '#009FD4', '#B381B3', '#939393', '#E3BC00', '#D47500', '#DC2A2A'];
-
-    function randomColor(){
-        return colors[Math.floor(Math.random()*7)]
-    }
 
     function sentimentColor(score){
         if (score>=80) return '#0E8D5A'

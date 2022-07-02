@@ -5,6 +5,16 @@ export default function DashboardCardTrendingCoin(){
 
     const {widget3_data}= useDashboard()
 
+    const ticker_library={
+        'ADA':'Cardano',
+        'ETH':'Ethereum',
+        'SOL':'Solana',
+        'BTC':'Bitcoin',
+        'BNB':'Binance',
+        'XRP':'Ripple',
+        'DOGE':'Dogecoin',
+    }
+
     const detailsPosition=[
         {
             pos:2,
@@ -36,9 +46,9 @@ export default function DashboardCardTrendingCoin(){
                             <div className="col-4 px-0" key={index}>
                                 <div className="floatingText d-flex justify-content-center text-center">
                                     <div className="pb-2">
-                                        <img className="mb-2"src={`../img/icon/${widget3_data[singleitem.pos-1].coinName}.png`} alt={widget3_data[singleitem.pos-1].coinName}/>
-                                        <p className="mb-0  trendingcoinTopText">{widget3_data[singleitem.pos-1].percentage} higher than usual</p>
-                                        <p className="trendingcoinBottomText mb-1">{widget3_data[singleitem.pos-1].numoftweets} tweets today</p>
+                                        <img className="mb-2"src={`../img/icon/${ticker_library[widget3_data[singleitem.pos-1].ticker]}.png`} alt={widget3_data[singleitem.pos-1].ticker}/>
+                                        <p className="mb-0  trendingcoinTopText">{widget3_data[singleitem.pos-1].percentage}% higher than usual</p>
+                                        <p className="trendingcoinBottomText mb-1">{widget3_data[singleitem.pos-1].tweet_volume_now} tweets today</p>
                                     </div>
                                 </div>
                                 <div className="trendingCoinBox"style={{height:singleitem.height, backgroundColor:singleitem.backgroundColor}}>

@@ -8,8 +8,18 @@ import TopArrow from "./TopArrow"
 export default function DashboardCardCoinInformation(){
 
     const [modalOpen,setModalOpen]=useState(false)
-    const {widgetCoinInfo_data,setLoginModalFunc }=useDashboard()
-    const {isAuthenticated}=useAuth()
+    const {widgetCoinInfo_data}=useDashboard()
+    const {setLoginModalFunc,isAuthenticated}= useAuth()
+
+    const ticker_library={
+        'ADA':'Cardano',
+        'ETH':'Ethereum',
+        'SOL':'Solana',
+        'BTC':'Bitcoin',
+        'BNB':'Binance',
+        'XRP':'Ripple',
+        'DOGE':'Dogecoin',
+    }
 
     function handleChangeCoin(){
         if (isAuthenticated){
@@ -27,14 +37,14 @@ export default function DashboardCardCoinInformation(){
     return(
         <>
         {
-            Object.keys(widgetCoinInfo_data).length===0 ?<DashboardCardLoading/>:
+            widgetCoinInfo_data.length===0 ?<DashboardCardLoading/>:
         
             <div className="px-1">
                 <div className="d-flex justify-content-between">
                     <div className="d-flex align-items-center pt-3">
-                        <img className="pe-3" src={`../img/icon/${widgetCoinInfo_data.id}.png`}/>
-                        <span className="pe-1  infoCoinName">{widgetCoinInfo_data.id}</span>
-                        <span className="infoTicker m-0">{widgetCoinInfo_data.ticker}</span>
+                        <img className="pe-3" src={`../img/icon/${ticker_library[widgetCoinInfo_data[0].ticker]}.png`}/>
+                        <span className="pe-1  infoCoinName">{ticker_library[widgetCoinInfo_data[0].ticker]}</span>
+                        <span className="infoTicker m-0">{widgetCoinInfo_data[0].ticker}</span>
                     </div>
                     <div className="align-items-center d-flex">
                         <button className="mt-3 btn btn-outline-primary btn-sm" onClick={handleChangeCoin}>Change Coin</button>
@@ -46,22 +56,22 @@ export default function DashboardCardCoinInformation(){
                         <div className="pb-2">
                             <span className="labelSmall">Price</span>
                             <div className="d-flex justify-content-between align-items-center">
-                                <span className="infoNumbers">{widgetCoinInfo_data.price.toLocaleString('en-US', {
+                                <span className="infoNumbers">{widgetCoinInfo_data[0].coin_price.toLocaleString('en-US', {
                                         style: 'currency',
                                         currency: 'USD',
                                         })}</span>
-                                <span className={`indicator ${widgetCoinInfo_data.priceDiff>0? 'textGreen': 'textRed'}`}><TopArrow isGreen={widgetCoinInfo_data.priceDiff>0}/> {Math.abs(widgetCoinInfo_data.priceDiff)}%</span>
+                                <span className={`indicator ${widgetCoinInfo_data[0].coin_price_percentage>0? 'textGreen': 'textRed'}`}><TopArrow isGreen={widgetCoinInfo_data[0].coin_price_percentage>0}/> {Math.abs(widgetCoinInfo_data[0].coin_price_percentage)}%</span>
                             </div>
                         </div>
 
                         <div className="pb-2">
                             <span className="labelSmall">Daily Volume</span>
                             <div className="d-flex justify-content-between align-items-center">
-                                <span className="infoNumbers">{widgetCoinInfo_data.volume.toLocaleString('en-US', {
+                                <span className="infoNumbers">{widgetCoinInfo_data[0].coin_volume.toLocaleString('en-US', {
                                         style: 'currency',
                                         currency: 'USD',
                                         })}</span>
-                                <span className={`indicator ${widgetCoinInfo_data.volumeDiff>0? 'textGreen': 'textRed'}`}><TopArrow isGreen={widgetCoinInfo_data.volumeDiff>0}/> {Math.abs(widgetCoinInfo_data.volumeDiff)}%</span>
+                                <span className={`indicator ${widgetCoinInfo_data[0].coin_volume_percentage>0? 'textGreen': 'textRed'}`}><TopArrow isGreen={widgetCoinInfo_data[0].coin_volume_percentage>0}/> {Math.abs(widgetCoinInfo_data[0].coin_volume_percentage)}%</span>
                             </div>
                         </div>
                         
@@ -70,16 +80,16 @@ export default function DashboardCardCoinInformation(){
                     <div className="pb-2">
                             <span className="labelSmall">Sentiment Score</span>
                             <div className="d-flex justify-content-between align-items-center">
-                                <span className="infoNumbers">{widgetCoinInfo_data.sentiment}</span>
-                                <span className={`indicator ${widgetCoinInfo_data.sentimentDiff>0? 'textGreen': 'textRed'}`}><TopArrow isGreen={widgetCoinInfo_data.sentimentDiff>0}/> {Math.abs(widgetCoinInfo_data.sentimentDiff)}%</span>
+                                <span className="infoNumbers">{widgetCoinInfo_data[0].tweet_sentiment}</span>
+                                <span className={`indicator ${widgetCoinInfo_data[0].tweet_sentiment_percentage>0? 'textGreen': 'textRed'}`}><TopArrow isGreen={widgetCoinInfo_data[0].tweet_sentiment_percentage>0}/> {Math.abs(widgetCoinInfo_data[0].tweet_sentiment_percentage)}%</span>
                             </div>
                         </div>
 
                         <div className="pb-2">
                             <span className="labelSmall">Tweet Count</span>
                             <div className="d-flex justify-content-between align-items-center">
-                                <span className="infoNumbers">{widgetCoinInfo_data.tweetCount}</span>
-                                <span className={`indicator ${widgetCoinInfo_data.tweetCountDiff>0? 'textGreen': 'textRed'}`}><TopArrow isGreen={widgetCoinInfo_data.tweetCountDiff>0}/> {Math.abs(widgetCoinInfo_data.tweetCountDiff)}%</span>
+                                <span className="infoNumbers">{widgetCoinInfo_data[0].tweet_count}</span>
+                                <span className={`indicator ${widgetCoinInfo_data[0].tweet_count_percentage>0? 'textGreen': 'textRed'}`}><TopArrow isGreen={widgetCoinInfo_data[0].tweet_count_percentage>0}/> {Math.abs(widgetCoinInfo_data[0].tweet_count_percentage)}%</span>
                             </div>
                         </div>
                     </div>

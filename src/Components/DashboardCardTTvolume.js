@@ -56,8 +56,8 @@ export default function DashboardCardTTVolume(){
 			const twittervolumeData=[]
 			const tradevolumeData=[]
 			widget4_data.map((item,index)=>{
-				twittervolumeData.push({time:item.time,value:item.twitter_volume})
-				tradevolumeData.push({time:item.time,value:item.trade_volume})
+				twittervolumeData.push({time:item.time,value:item.tweet_volume_percentage})
+				tradevolumeData.push({time:item.time,value:item.trade_volume_percentage})
 				
 			})
 			const twitterVolume = chart.addAreaSeries({ lineColor: '#0E8D5A', topColor: '#189865', bottomColor: 'rgba(255, 255, 255, 0.6)' });

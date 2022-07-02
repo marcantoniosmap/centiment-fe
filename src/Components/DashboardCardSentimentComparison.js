@@ -17,7 +17,7 @@ export default function DashboardCardSentimentComparison(){
                <div className="row w-100" key={index}>
                    <div className="sentimentComparisonTicker col-2">{singleItem.ticker}</div>
                    <div className="col-10 p-0">
-                       <div className="sentimentComparisonBackground"><div className="sentimentComparisonItem" style={{width:singleItem.percentage+'%'}}>-</div></div>
+                       <div className="sentimentComparisonBackground"><div className="sentimentComparisonItem" style={{width:parseInt(singleItem.tweet_sentiment)+'%'}}>-</div></div>
                    </div>
                </div>
            ))}

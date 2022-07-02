@@ -47,6 +47,11 @@ export default function DashboardCardPriceChart(){
 				},
 				width: chartContainerRef.current.clientWidth,
 				height: 480,
+				localization:{
+					timeFormatter : businessDayOrTimestamp =>{
+						return Date(businessDayOrTimestamp).slice(0,24)
+					}
+				}
 
 			});
 			chart.timeScale().fitContent();
@@ -54,9 +59,9 @@ export default function DashboardCardPriceChart(){
 			const newSeries = chart.addCandlestickSeries();
 			newSeries.setData(widgetPrice_data);
 
-            const movingAverage = chart.addLineSeries({color:'#BFE3C0', lineWidth:'1'});
-            movingAverage.setData(getMovingAverage(widgetPrice_data,20))
-            chart.priceScale(movingAverage)
+            // const movingAverage = chart.addLineSeries({color:'#BFE3C0', lineWidth:'1'});
+            // movingAverage.setData(getMovingAverage(widgetPrice_data,20))
+            // chart.priceScale(movingAverage)
 
 			window.addEventListener('resize', handleResize);
 

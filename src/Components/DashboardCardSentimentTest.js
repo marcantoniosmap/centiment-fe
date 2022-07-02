@@ -20,6 +20,13 @@ export default function DashboardCardSentimentTest(){
             setFieldText(e.target.value)
         }else return 
     }
+    function sentimentColor(score){
+        if (score>=80) return '#0E8D5A'
+        if (score<80 && score >=60 ) return '#71AA3C'
+        if (score<60 && score >=40) return '#D1C51F'
+        if (score<40 && score >=20) return '#DC8444'
+        else return '#E35B5B'
+    }
 
     return(
         <div>
@@ -30,7 +37,12 @@ export default function DashboardCardSentimentTest(){
                 </Form.Group>
                 <div className="d-flex justify-content-between w-100 pt-4">
                     <div className="d-flex align-items-center align-self-end">
-                        <p className="m-0">Result Score : {score}</p>
+                        <div className="m-0 d-flex ">Result Score : 
+                        {
+                            score==='-'? <span>-</span>:
+                            <div className="mx-2 twitterScore d-flex justify-content-center align-items-center" style={{backgroundColor:sentimentColor(score)}}>{score}</div>
+                        }
+                        </div>
                     </div>
                     <div>
                     </div>

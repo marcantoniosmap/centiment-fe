@@ -2,7 +2,7 @@ import { createChart,ColorType } from "lightweight-charts"
 import { useRef, useEffect, useState } from "react";
 import { useDashboard } from "../DashboardContext";
 
-export default function DashboardCardTweetVolumeSentiment({loc,refreshTrigger}){
+export default function DashboardCardTweetVolumeSentiment({loc}){
 	
 	
 	const {getWidgetData,widget1_data}=useDashboard()
@@ -48,12 +48,6 @@ export default function DashboardCardTweetVolumeSentiment({loc,refreshTrigger}){
 			histogramSeries.setData(widget1_data);
 			
 
-			
-
-            // const movingAverage = chart.addLineSeries({color:'#BFE3C0', lineWidth:'1'});
-            // movingAverage.setData(getMovingAverage(data,20))
-            // chart.priceScale(movingAverage)
-
 			window.addEventListener('resize', handleResize);
 
 			return () => {
@@ -62,7 +56,7 @@ export default function DashboardCardTweetVolumeSentiment({loc,refreshTrigger}){
 				chart.remove();
 			};
 		},
-		[refreshTrigger,widget1_data]
+		[widget1_data]
 	);
 
 	return (
