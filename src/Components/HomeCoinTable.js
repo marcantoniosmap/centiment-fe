@@ -2,17 +2,49 @@ import { Table, useAccordionButton } from "react-bootstrap";
 import { useNavigate } from "react-router";
 import TopArrow from "./TopArrow";
 import fakeCoinInfoData from "../fakeCoinInfoData"
+import { useEffect, useState } from "react";
+import DashboardCardLoading from "./DashboardCardLoading";
 export default function HomeCoinTable(){
     
     const history = useNavigate()
     const headingList=['Last Price','Volume','Sentiment Score','Daily Tweet Volume']
     const iterationSpec = ['price','volume','sentiment','tweetCount']
     const fakeCoin=['Bitcoin','Ethereum','Binance','Cardano','Ripple','Solana','Dogecoin']
-
+    const domain='https://api-centiment.marcantonioapp.com'
+    const [tableData,setTableData]=useState([])
     function handleClick(param){
       console.log('helo')
         history(`/dashboard/${param}`)
     }
+
+    const coinTickerLibrary={
+      'BTC':'Bitcoin' ,
+      'ETH':'Ethereum',
+      'BNB':'Binance' ,
+      'XRP':'Ripple'  ,
+      'ADA':'Cardano' ,
+      'SOL':'Solana'  ,
+      'DOGE':'Dogecoin',
+  }
+
+    async function initialFetch(){
+      try{
+        const f = await fetch(`${domain}/all-coin-information`)
+        const data = await f.json()
+        data.payload.map((singleItem,index)=>{
+          data.payload[index].coinName=coinTickerLibrary[singleItem.ticker]
+        })
+        setTableData(data.payload)
+
+      }catch{
+
+      }
+    }
+
+
+    useEffect(()=>{
+      initialFetch()
+    },[])
     return(
        <div className="backgroundDefault py-5">
         <div className="container">
@@ -32,54 +64,55 @@ export default function HomeCoinTable(){
             </thead>
             <tbody>
               {
-                fakeCoin.map((singleItem,index)=>(
-                  <tr key={index} style={{cursor:'pointer'}} onClick={()=>handleClick(singleItem)}>
+                tableData.length===0 ? <DashboardCardLoading/> :
+                tableData.map((singleItem,index)=>(
+                  <tr key={index} style={{cursor:'pointer'}} onClick={()=>handleClick(singleItem.coinName)}>
                 
                     <td className="py-4 px-2">
                         <div className="d-flex align-items-center">
-                          <img className="pe-3" height={30} src={`../img/icon/${singleItem}.png`}/>
-                            <span className="pe-1 infoNumbersHome ">{singleItem}</span>
-                            <span className="infoTicker m-0">{fakeCoinInfoData[singleItem].ticker}</span>
+                          <img className="pe-3" height={30} src={`../img/icon/${singleItem.coinName}.png`}/>
+                            <span className="pe-1 infoNumbersHome ">{singleItem.coinName}</span>
+                            <span className="infoTicker m-0">{singleItem.ticker}</span>
                       </div>                    
                     </td>
 
                     <td className="py-0" >
                       <div className="py-4 d-flex justify-content-end">
-                      <span className="infoNumbersHome">{fakeCoinInfoData[singleItem].price.toLocaleString('en-US', {
+                      <span className="infoNumbersHome">{singleItem.coin_price.toLocaleString('en-US', {
                             style: 'currency',
                             currency: 'USD',
                           })}
                       </span>
-                      <span className={`d-none d-lg-block px-2 indicatorHome ${fakeCoinInfoData[singleItem].priceDiff>0? 'textGreen': 'textRed'}`}><TopArrow isGreen={fakeCoinInfoData[singleItem].priceDiff>0}/> {Math.abs(fakeCoinInfoData[singleItem].priceDiff)}%</span>
+                      <span className={`d-none d-lg-block px-2 indicatorHome ${singleItem.coin_price_percentage>0? 'textGreen': 'textRed'}`}><TopArrow isGreen={singleItem.coin_price_percentage>0}/> {Math.abs(singleItem.coin_price_percentage)}%</span>
                       </div>
                     </td>
 
                     <td className="py-0">
                       <div className="py-4 d-flex justify-content-end">
-                        <span className="infoNumbersHome">{fakeCoinInfoData[singleItem].volume.toLocaleString('en-US', {
+                        <span className="infoNumbersHome">{singleItem.coin_volume.toLocaleString('en-US', {
                               style: 'currency',
                               currency: 'USD',
                               maximumFractionDigits:0
 
                             })}
                         </span>
-                        <span className={`d-none d-lg-block px-2 indicatorHome ${fakeCoinInfoData[singleItem].volumeDiff>0? 'textGreen': 'textRed'}`}><TopArrow isGreen={fakeCoinInfoData[singleItem].volumeDiff>0}/> {Math.abs(fakeCoinInfoData[singleItem].volumeDiff)}%</span>
+                        <span className={`d-none d-lg-block px-2 indicatorHome ${singleItem.coin_volume_percentage>0? 'textGreen': 'textRed'}`}><TopArrow isGreen={singleItem.coin_volume_percentage>0}/> {Math.abs(singleItem.coin_volume_percentage)}%</span>
                       </div>
                     </td>
 
                     <td className="py-0">
                       <div className="py-4 d-flex justify-content-end">
-                        <span className="infoNumbersHome">{fakeCoinInfoData[singleItem].sentiment}
+                        <span className="infoNumbersHome">{singleItem.tweet_sentiment}
                         </span>
-                        <span className={`d-none d-lg-block px-2 indicatorHome ${fakeCoinInfoData[singleItem].sentimentDiff>0? 'textGreen': 'textRed'}`}><TopArrow isGreen={fakeCoinInfoData[singleItem].sentimentDiff>0}/> {Math.abs(fakeCoinInfoData[singleItem].sentimentDiff)}%</span>
+                        <span className={`d-none d-lg-block px-2 indicatorHome ${singleItem.tweet_sentiment_percentage>0? 'textGreen': 'textRed'}`}><TopArrow isGreen={singleItem.tweet_sentiment_percentage>0}/> {Math.abs(singleItem.tweet_sentiment_percentage)}%</span>
                         </div>
                     </td>
 
                     <td className="py-0">
                       <div className="py-4 d-flex justify-content-end">
-                        <span className="infoNumbersHome">{fakeCoinInfoData[singleItem].tweetCount.toLocaleString('en-US')}
+                        <span className="infoNumbersHome">{singleItem.tweet_count.toLocaleString('en-US')}
                         </span>
-                        <span className={`d-none d-lg-block px-2 indicatorHome ${fakeCoinInfoData[singleItem].tweetCountDiff>0? 'textGreen': 'textRed'}`}><TopArrow isGreen={fakeCoinInfoData[singleItem].tweetCountDiff>0}/> {Math.abs(fakeCoinInfoData[singleItem].tweetCountDiff)}%</span>
+                        <span className={`d-none d-lg-block px-2 indicatorHome ${singleItem.tweet_count_percentage>0? 'textGreen': 'textRed'}`}><TopArrow isGreen={singleItem.tweet_count_percentage}/> {Math.abs(singleItem.tweet_count_percentage)}%</span>
                         </div>
                     </td>
                     {/* {

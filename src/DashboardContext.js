@@ -223,6 +223,7 @@ export function DashboardProvider({children}){
             coin='Bitcoin'
         }
         try{
+            console.log('coin:',coin)
             const fetchAPI= await fetch(`${domain_amar}/${widgetTypeLibrary[widgetType]}?relative_time=1d&ticker=${coinTickerLibrary[coin]}`)
             const fetchResult = await fetchAPI.json();
             // console.log(fetchResult)
@@ -239,7 +240,6 @@ export function DashboardProvider({children}){
                                 low:singleItem.low_price,
                             })
                         })
-                        console.log(tempvar[0])
                         setWIdgetPrice_data(tempvar.slice(1,tempvar.length-1))
                         break
                     case 'coinInfo':

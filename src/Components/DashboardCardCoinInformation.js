@@ -42,9 +42,9 @@ export default function DashboardCardCoinInformation(){
             <div className="px-1">
                 <div className="d-flex justify-content-between">
                     <div className="d-flex align-items-center pt-3">
-                        <img className="pe-3" src={`../img/icon/${ticker_library[widgetCoinInfo_data[0].ticker]}.png`}/>
-                        <span className="pe-1  infoCoinName">{ticker_library[widgetCoinInfo_data[0].ticker]}</span>
-                        <span className="infoTicker m-0">{widgetCoinInfo_data[0].ticker}</span>
+                        <img className="pe-3" src={`../img/icon/${ticker_library[widgetCoinInfo_data.ticker]}.png`}/>
+                        <span className="pe-1  infoCoinName">{ticker_library[widgetCoinInfo_data.ticker]}</span>
+                        <span className="infoTicker m-0">{widgetCoinInfo_data.ticker}</span>
                     </div>
                     <div className="align-items-center d-flex">
                         <button className="mt-3 btn btn-outline-primary btn-sm" onClick={handleChangeCoin}>Change Coin</button>
@@ -56,22 +56,22 @@ export default function DashboardCardCoinInformation(){
                         <div className="pb-2">
                             <span className="labelSmall">Price</span>
                             <div className="d-flex justify-content-between align-items-center">
-                                <span className="infoNumbers">{widgetCoinInfo_data[0].coin_price.toLocaleString('en-US', {
+                                <span className="infoNumbers">{widgetCoinInfo_data.coin_price.toLocaleString('en-US', {
                                         style: 'currency',
                                         currency: 'USD',
                                         })}</span>
-                                <span className={`indicator ${widgetCoinInfo_data[0].coin_price_percentage>0? 'textGreen': 'textRed'}`}><TopArrow isGreen={widgetCoinInfo_data[0].coin_price_percentage>0}/> {Math.abs(widgetCoinInfo_data[0].coin_price_percentage)}%</span>
+                                <span className={`indicator ${widgetCoinInfo_data.coin_price_percentage>0? 'textGreen': 'textRed'}`}><TopArrow isGreen={widgetCoinInfo_data.coin_price_percentage>0}/> {Math.abs(widgetCoinInfo_data.coin_price_percentage)}%</span>
                             </div>
                         </div>
 
                         <div className="pb-2">
                             <span className="labelSmall">Daily Volume</span>
                             <div className="d-flex justify-content-between align-items-center">
-                                <span className="infoNumbers">{widgetCoinInfo_data[0].coin_volume.toLocaleString('en-US', {
+                                <span className="infoNumbers">{widgetCoinInfo_data.coin_volume.toLocaleString('en-US', {
                                         style: 'currency',
                                         currency: 'USD',
                                         })}</span>
-                                <span className={`indicator ${widgetCoinInfo_data[0].coin_volume_percentage>0? 'textGreen': 'textRed'}`}><TopArrow isGreen={widgetCoinInfo_data[0].coin_volume_percentage>0}/> {Math.abs(widgetCoinInfo_data[0].coin_volume_percentage)}%</span>
+                                <span className={`indicator ${widgetCoinInfo_data.coin_volume_percentage>0? 'textGreen': 'textRed'}`}><TopArrow isGreen={widgetCoinInfo_data.coin_volume_percentage>0}/> {Math.abs(widgetCoinInfo_data.coin_volume_percentage)}%</span>
                             </div>
                         </div>
                         
@@ -80,16 +80,16 @@ export default function DashboardCardCoinInformation(){
                     <div className="pb-2">
                             <span className="labelSmall">Sentiment Score</span>
                             <div className="d-flex justify-content-between align-items-center">
-                                <span className="infoNumbers">{widgetCoinInfo_data[0].tweet_sentiment}</span>
-                                <span className={`indicator ${widgetCoinInfo_data[0].tweet_sentiment_percentage>0? 'textGreen': 'textRed'}`}><TopArrow isGreen={widgetCoinInfo_data[0].tweet_sentiment_percentage>0}/> {Math.abs(widgetCoinInfo_data[0].tweet_sentiment_percentage)}%</span>
+                                <span className="infoNumbers">{widgetCoinInfo_data.tweet_sentiment}</span>
+                                <span className={`indicator ${widgetCoinInfo_data.tweet_sentiment_percentage>0? 'textGreen': 'textRed'}`}><TopArrow isGreen={widgetCoinInfo_data.tweet_sentiment_percentage>0}/> {Math.abs(widgetCoinInfo_data.tweet_sentiment_percentage)}%</span>
                             </div>
                         </div>
 
                         <div className="pb-2">
                             <span className="labelSmall">Tweet Count</span>
                             <div className="d-flex justify-content-between align-items-center">
-                                <span className="infoNumbers">{widgetCoinInfo_data[0].tweet_count}</span>
-                                <span className={`indicator ${widgetCoinInfo_data[0].tweet_count_percentage>0? 'textGreen': 'textRed'}`}><TopArrow isGreen={widgetCoinInfo_data[0].tweet_count_percentage>0}/> {Math.abs(widgetCoinInfo_data[0].tweet_count_percentage)}%</span>
+                                <span className="infoNumbers">{widgetCoinInfo_data.tweet_count}</span>
+                                <span className={`indicator ${widgetCoinInfo_data.tweet_count_percentage>0? 'textGreen': 'textRed'}`}><TopArrow isGreen={widgetCoinInfo_data.tweet_count_percentage>0}/> {Math.abs(widgetCoinInfo_data.tweet_count_percentage)}%</span>
                             </div>
                         </div>
                     </div>
