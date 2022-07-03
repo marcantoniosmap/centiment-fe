@@ -8,5 +8,434 @@ $theme-colors: (
 $font-family-sans-serif: "Poppins",-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto;
 $font-family-serif: "Poppins",-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto;
 
+.dashboardCard {
+	padding: 0.5rem 1rem 1rem 1rem;
+	height: 100%;
+	width: 100%;
+	background-color: white;
+	border-radius: 10px;
+	filter: drop-shadow(0px 3px 6px rgba(0, 0, 0, 0.288));
+	overflow: hidden;
+}
+.dashboardCardWidget {
+	min-height: 278px;
+}
+.dashboardCardTitle {
+	font-family: 'Poppins';
+	font-size: 16px;
+	color: #4A4A4A;
+}
+.dashboardCardChart {
+	overflow: hidden;
+}
+.dashboardCardDots {
+	cursor: pointer;
+}
+.dashboardCardChartTop {
+	height: calc(90vh/3*2);
+}
+.dashboardCardChartWidget {
+	height: calc(90vh/3);
+}
+.emptyOuterWrapper {
+	height: 100%;
+	width: 100%;
+	padding: 10px 0px;
+}
+.dashboardCardEmptyOuter {
+	height: 100%;
+	width: 100%;
+	border-width: 8px;
+	border-color: #EBEDF3;
+	border-style: dashed;
+	border-radius: 14px;
+	cursor: pointer;
+	&:hover {
+		border-color: #dfdfdf;
+	}
+}
+.dashboardCardEmptyText {
+	font-family: 'Poppins';
+	font-weight: 600;
+	color: #D1D5DF;
+	text-align: center;
+}
+.leaderboardText {
+	font-family: 'Poppins';
+	color: white;
+	font-size: 2rem;
+	font-weight: 600;
+}
+.trendingcoinTopText {
+	font-family: 'Poppins';
+	color: #707070;
+	line-height: 90%;
+	font-size: 0.9rem;
+}
+.trendingcoinBottomText {
+	font-family: 'Poppins';
+	color: #ABABAB;
+	font-size: 0.8rem;
+}
+.trendingCoinBox {
+	border-width: 0px 3px;
+	border-style: solid;
+	border-color: white;
+}
+.sentimentComparisonTicker {
+	text-align: center;
+	color: #707070;
+	font-size: 0.9rem;
+}
+.sentimentComparisonBackground {
+	background-color: #E35B5B;
+}
+.sentimentComparisonItem {
+	background-color: #0E8D5A;
+	color: rgba(0, 0, 0, 0);
+}
+.fearAndGreedTextBottom {
+	margin: 0px;
+	font-weight: 600;
+}
+.fearAndGreedTextUp {
+	margin: 0px;
+	line-height: 90%;
+	font-size: 0.7rem;
+}
+.fearAndGreedLine {
+	border-bottom: #D5D5D5;
+	margin: 0;
+}
+.fearAndGreedTextNumber {
+	border-radius: 50%;
+	width: 36px;
+	color: white;
+	font-weight: 600px;
+}
+.settingpopup {
+	position: absolute;
+	z-index: 10001;
+	max-height: 230px;
+	width: 180px;
+	right: 10px;
+	padding: 1rem 0rem;
+	top: 10px;
+	background-color: white;
+	border-radius: 8px;
+	border-style: solid;
+	border-color: #DBDBDB;
+	border-width: 1px;
+	filter: drop-shadow(0px 3px 6px rgba(0, 0, 0, 0.288));
+}
+.settingpopupchild {
+	margin: 0;
+	cursor: pointer;
+	font-size: 0.9rem;
+	color: #4A4A4A;
+	&:hover {
+		background-color: #2467DB;
+		color: #ffff;
+	}
+}
+.settingpopupclose {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+}
+.widgetImageModal {
+	background-color: #707070;
+	height: 120px;
+	width: 100%;
+}
+.widgetTextModal {
+	font-size: 0.9rem;
+	text-align: center;
+	padding-top: 0.5rem;
+	margin: 0;
+}
+.widgetModalActive {
+	color: #2467DB;
+	font-weight: 600;
+}
+.widgetModalActivePic {
+	filter: drop-shadow(0px 3px 6px rgba(0, 0, 0, 0.288));
+}
+.TnTLegend {
+	position: absolute;
+	top: 40px;
+	left: 30px;
+	z-index: 1001;
+	width: 200px;
+}
+.TnTlegendLine {
+	border: 2px solid #0E8D5A;
+	opacity: 1;
+	margin: 7px 0;
+}
+.TnTlegendText {
+	font-size: 0.8rem;
+}
+.disabledModalpicture {
+	filter: grayscale(1);
+}
+.topDashboardHeight {
+	min-height: 150px;
+}
+.twitterUserPic {
+	border-radius: 50%;
+	width: 40px;
+	height: 40px;
+	background-color: #707070;
+	color: white;
+	margin: 0;
+	font-weight: 600;
+}
+.twitterScore {
+	border-radius: 50%;
+	width: 30px;
+	height: 30px;
+	background-color: #707070;
+	color: white;
+	margin: 0;
+	font-size: 0.8rem;
+}
+.scrollWrapper {
+	overflow-y: scroll;
+	height: 100%;
+	max-height: 300px;
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+	&::-webkit-scrollbar {
+		display: none;
+	}
+}
+.twitterUsername {
+	color: #545454;
+	padding-top: 3%;
+	font-size: 0.9rem;
+	line-height: 95%;
+}
+.twitterTime {
+	color: #949494;
+	font-size: 0.8rem;
+	font-style: italic;
+}
+.tweetMessage {
+	font-weight: 500;
+}
+.tweeterAvatar {
+	vertical-align: middle;
+	width: 45px;
+	height: 45px;
+	border-radius: 50%;
+}
+.infoCoinName {
+	font-weight: 700;
+	font-size: 1.3rem;
+}
+.infoTicker {
+	font-size: 0.8rem;
+	margin-top: 0.1rem;
+	font-weight: 600;
+	padding: 0 0.3rem;
+	background-color: #EBEDF3;
+	border-radius: 2px;
+}
+.labelSmall {
+	color: #ABABAB;
+	font-size: 0.8rem;
+}
+.infoNumbers {
+	font-weight: 600;
+	font-size: 1.1rem;
+}
+.infoNumbersHome {
+	font-weight: 600;
+}
+.indicator {
+	font-weight: 600;
+	font-size: 0.8rem;
+}
+.indicatorHome {
+	font-weight: 600;
+	font-size: 0.9rem;
+}
+.textRed {
+	color: #E35B5B;
+}
+.textGreen {
+	color: #0E8D5A;
+}
+.coinInfoBorder {
+	border-right: #D5D5D5;
+	border-right-style: solid;
+	border-right-width: 1px;
+}
+.hoverSelectedText {
+	position: absolute;
+	border-radius: 2px;
+	color: white;
+	background-color: #E35B5B;
+	padding: 2px 0.5rem;
+	top: 12px;
+	font-size: 0.8rem;
+	left: 25px;
+	font-weight: 600;
+}
+.font-weight-bold {
+	font-weight: 600 !important;
+}
+@media (max-width: 800px) {
+	.dashboardCardChartTop {
+		height: auto;
+	}
+}
+
+.backgroundDefault {
+	background-color: #EBEDF3;
+	padding-top: 22px;
+}
+.mainNavbar {
+	max-width: 100vw;
+	min-height: 72px;
+	background-color: white;
+	filter: drop-shadow(0px 3px 6px rgba(0, 0, 0, 0.288));
+	z-index: 1000;
+}
+a {
+	text-decoration: none !important;
+	color: inherit !important;
+	&:hover {
+		text-decoration: none !important;
+		color: inherit !important;
+	}
+	&:focus {
+		text-decoration: none !important;
+		color: inherit !important;
+	}
+	&:active {
+		text-decoration: none !important;
+		color: inherit !important;
+	}
+}
+.navActive {
+	font-weight: 600;
+	color: #2467DB !important;
+}
+.text-red {
+	color: #E35B5B;
+}
+.text-green {
+	color: #0E8D5A;
+}
+.overlay {
+	&:before {
+		content: ' ';
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		z-index: 2;
+		background: #212529;
+		opacity: 0;
+		pointer-events: none;
+		transition: ease opacity 300ms 100ms;
+	}
+	position: relative;
+}
+.Typewriter {
+	display: inline;
+}
+.floatingImage {
+	animation: float 6s ease-in-out infinite;
+}
+.btn-light {
+	background-color: #EBEDF3 !important;
+}
+.tutorialNumber {
+	height: 50px;
+	width: 50px;
+	border: #2467DB;
+	border-style: solid;
+	border-radius: 50%;
+	margin: 20px 0px;
+	color: #2467DB;
+	font-size: 1.4rem;
+	font-weight: 700;
+}
+.process-vertical {
+	text-align: left;
+	.process-step {
+		width: 100%;
+		flex-direction: row;
+		justify-content: start;
+		align-items: start;
+		position: relative;
+		padding-bottom: 60px;
+		&:after {
+			width: 2px;
+			display: block;
+			background-color: #EDEDED;
+			position: absolute;
+			content: '';
+			height: calc(100% - 80px);
+			top: 70px;
+			left: 30px;
+		}
+	}
+	.process-step-circle {
+		height: 60px;
+		width: 60px;
+		margin: 0 15px 0 0;
+		min-height: 60px;
+		min-width: 60px;
+	}
+	.process-step-content {
+		padding-top: 0;
+	}
+}
+.process {
+	.process-step {
+		display: flex;
+	}
+	.process-step-circle {
+		border-color: #953735;
+		display: flex;
+		justify-content: center;
+		text-align: center;
+		border: 2px solid #2467DB;
+		color: #2467DB;
+		border-radius: 50%;
+		align-items: center;
+		position: relative;
+		background-color: transparent;
+		transition: all 0.2s ease-in-out;
+		&:hover {
+			background-color: #2467DB;
+			color: white;
+		}
+	}
+}
+.height-responsive-50 {
+	height: auto;
+}
+.border-selected {
+	border-color: #2467DB;
+	border-width: 5px;
+	border-style: solid;
+}
+@media (min-width: 1440px) {
+	.container-xl-custom {
+		max-width: 1440px;
+	}
+}
+@media (min-width: 800px) {
+	.height-responsive-50 {
+		height: 50%;
+	}
+}
+
 /* import bootstrap to set changes */
 @import "~bootstrap/scss/bootstrap";

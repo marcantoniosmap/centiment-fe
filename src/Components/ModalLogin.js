@@ -48,11 +48,11 @@ export default function ModalLogin(props) {
               <p>In order to experience the full dashboard, you would need to be authenticated! </p>
               <p>By being authenticated, you would be able to save widget configuration, and create the dashboard you desire!</p>
               <div className="row">
-                <div className="col-lg-6 ">
+                <div className="col-lg-6 mb-lg-0 mb-2 ">
                 <button className="btn btn-light w-100" onClick={toLogin}>Log In</button>
 
                 </div>
-                <div className="col-lg-6 ps-0">
+                <div className="col-lg-6 ps-lg-0">
               <button className="btn btn-primary w-100"onClick={toRegister}>Register</button>
 
                 </div>

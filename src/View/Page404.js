@@ -7,7 +7,7 @@ export default function Page404(){
        <div style={{height:'90vh'}}>
             <div className="d-flex h-100 justify-content-center align-items-center">
                 <div className="px-5">
-                 <img src="../img/404page.png" />
+                 <img src="../img/404page.png" className="img-fluid" />
                  <h1 className="font-weight-bold text-center">Where are you going?</h1>
                  <div className='d-flex justify-content-center pt-2'>
                  <Link to="/home" className='btn btn-primary btn-lg text-white mx-auto'> Take Me Back Home</Link>
