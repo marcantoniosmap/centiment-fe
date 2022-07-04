@@ -123,7 +123,7 @@ export function DashboardProvider({children}){
     ///FETCHING THE WIDGET///
     async function getWidgetSetup(currentCoin){
         if (!isAuthenticated){
-            setWidgetSetup([{id:'widget-1'},{id:'none'},{id:'none'}])
+            setWidgetSetup([{id:'none'},{id:'none'},{id:'none'}])
             var jumpstartArray=['priceChart','coinInfo','recentTweets']
                     jumpstartArray.map((widget)=>{
                         refreshWidget(widget,currentCoin)
@@ -161,7 +161,7 @@ export function DashboardProvider({children}){
 
 
             }catch (err) {
-                setWidgetSetup([{id:'none'},{id:'widget-1'},{id:'none'}])
+                setWidgetSetup([{id:'none'},{id:'none'},{id:'none'}])
                 var jumpstartArray=['priceChart','coinInfo','recentTweets'].concat(['none','none','none'])
                     jumpstartArray.map((widget)=>{
                         refreshWidget(widget,currentCoin)
