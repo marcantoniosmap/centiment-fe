@@ -112,7 +112,7 @@ export default function HomeCoinTable(){
                       <div className="py-4 d-flex justify-content-end">
                         <span className="infoNumbersHome">{singleItem.tweet_count.toLocaleString('en-US')}
                         </span>
-                        <span className={`d-none d-lg-block px-2 indicatorHome ${singleItem.tweet_count_percentage>0? 'textGreen': 'textRed'}`}><TopArrow isGreen={singleItem.tweet_count_percentage}/> {Math.abs(singleItem.tweet_count_percentage)}%</span>
+                        <span className={`d-none d-lg-block px-2 indicatorHome ${singleItem.tweet_count_percentage>0? 'textGreen': 'textRed'}`}><TopArrow isGreen={singleItem.tweet_count_percentage>0}/> {Math.abs(singleItem.tweet_count_percentage)}%</span>
                         </div>
                     </td>
                     {/* {
