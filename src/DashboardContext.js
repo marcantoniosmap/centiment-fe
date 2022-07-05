@@ -51,7 +51,7 @@ export function DashboardProvider({children}){
     const [chooseWidgetModal,setChooseWidgetModal]=useState(false)
     const [selectedLocation,setSelectedLocation]=useState(null)
     const [activeWidget,setActiveWidget]=useState([])
-    const [activeCoin,setActiveCoin]=useState()
+    const [activeCoin,setActiveCoin]=useState('Bitcoin')
 
     const [widget1_data,setWidget1_data]=useState([])
     const [widget3_data,setWidget3_data]=useState([])
@@ -89,7 +89,11 @@ export function DashboardProvider({children}){
                 const fetch = await updateWidgetSetup(tempArray)
                 setWidgetSetup(tempArray)
                 updateActiveWidget()
-                refreshWidget(`widget-${selectedChoice}`,activeCoin)
+                var activeC=window.location.pathname.split('/')[2]
+                if (activeCoin){
+                    activeC=activeCoin
+                }
+                refreshWidget(`widget-${selectedChoice}`,activeC)
                 setModal(false,null)
             }catch(err){
                 setModal(false,null)
@@ -218,7 +222,8 @@ export function DashboardProvider({children}){
     }
 
     async function refreshWidget(widgetType,coin){
-        if (coin==null){ 
+        console.log(coin)
+        if (coin===null || coin===undefined){ 
             console.log('undf')
             coin='Bitcoin'
         }
