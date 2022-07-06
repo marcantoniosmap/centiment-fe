@@ -14,6 +14,34 @@ export default function DashboardCardRecentTweets(){
         if (score<40 && score >=20) return '#DC8444'
         else return '#E35B5B'
     }
+    function timeSince(date) {
+        var dateUse = new Date(date)
+
+        var seconds = Math.floor((new Date() - dateUse) / 1000);
+      
+        var interval = seconds / 31536000;
+      
+        if (interval > 1) {
+          return Math.floor(interval) + " years";
+        }
+        interval = seconds / 2592000;
+        if (interval > 1) {
+          return Math.floor(interval) + " months";
+        }
+        interval = seconds / 86400;
+        if (interval > 1) {
+          return Math.floor(interval) + " days";
+        }
+        interval = seconds / 3600;
+        if (interval > 1) {
+          return Math.floor(interval) + " hours";
+        }
+        interval = seconds / 60;
+        if (interval > 1) {
+          return Math.floor(interval) + " minutes";
+        }
+        return Math.floor(seconds) + " seconds";
+      }
             
     return(
         <>
@@ -23,28 +51,28 @@ export default function DashboardCardRecentTweets(){
         <div className="scrollWrapper p-2 pt-3">
         {widgetTweets_data.map((singleItem,index)=>(
             <div className="recentTweetWrapper" key={index}>
-                <a target='_blank' href={`https://twitter.com/${singleItem.twitterHandle}/status/${singleItem.id}`}>
+                <a target='_blank' href={`https://twitter.com/${singleItem.username}/status/${singleItem.tweet_id}`}>
                 <div className="d-flex justify-content-between">
                     <div className="leftSide d-flex justify-content-start">
                         <div className="">
                             {/* <div className="twitterUserPic d-flex justify-content-center align-items-center" style={{backgroundColor:randomColor()}}>{singleItem.twitterHandle[0].toUpperCase()}</div> */}
-                                <img className='tweeterAvatar'src={`https://unavatar.io/twitter/${singleItem.twitterHandle}`}  alt={`@${singleItem.twitterHandle} profile pic`}/>
+                                <img className='tweeterAvatar'src={`https://unavatar.io/twitter/${singleItem.username}`}  alt={`@${singleItem.username} profile pic`}/>
                         </div>
                         <div style={{paddingLeft:'0.5rem'}}>
-                            <p className="m-0 twitterUsername">@{singleItem.twitterHandle}</p>
-                            <p className="m-0 twitterTime">{singleItem.time}</p>
+                            <p className="m-0 twitterUsername">@{singleItem.username}</p>
+                            <p className="m-0 twitterTime">{timeSince(singleItem.time)}</p>
                         </div>
 
                         
                     </div>
 
                     <div className="rightSide">
-                        <div className="twitterScore d-flex justify-content-center align-items-center" style={{backgroundColor:sentimentColor(singleItem.score)}}>{singleItem.score}</div>
+                        <div className="twitterScore d-flex justify-content-center align-items-center" style={{backgroundColor:sentimentColor(singleItem.sentiment)}}>{parseInt(singleItem.sentiment)}</div>
                         
                     </div>
 
                 </div>
-                <p className="pt-2 pb-3 m-0 tweetMessage">{singleItem.tweetContentText}</p>
+                <p className="pt-2 pb-3 m-0 tweetMessage">{singleItem.tweet}</p>
                 </a>
             </div>
         ))}

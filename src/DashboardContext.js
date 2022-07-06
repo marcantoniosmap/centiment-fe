@@ -204,7 +204,7 @@ export function DashboardProvider({children}){
     const widgetTypeLibrary={
         'priceChart':'candlestick-relative',
         'coinInfo':'coin-general-information',
-        'recentTweets':'recent-tweet',
+        'recentTweets':'recent-tweets-sentiment',
         'widget-1':'tweet-volume-sentiment',
         'widget-3':'tweet-trending-coins',
         'widget-4':'tweet-trade-correlation',
@@ -222,13 +222,13 @@ export function DashboardProvider({children}){
     }
 
     async function refreshWidget(widgetType,coin){
-        console.log(coin)
+        if (widgetType==='none') return 0
         if (coin===null || coin===undefined){ 
             console.log('undf')
             coin='Bitcoin'
         }
         try{
-            console.log('coin:',coin)
+            console.log('widget:',widgetTypeLibrary[widgetType])
             const fetchAPI= await fetch(`${domain_amar}/${widgetTypeLibrary[widgetType]}?relative_time=1d&ticker=${coinTickerLibrary[coin]}`)
             const fetchResult = await fetchAPI.json();
             // console.log(fetchResult)
@@ -251,7 +251,8 @@ export function DashboardProvider({children}){
                         setWidgetCoinInfo_data(fetchResult.payload)
                         break
                     case 'recentTweets':
-                        setWidgetTweets_data(recentTweetData)
+
+                        setWidgetTweets_data(fetchResult.payload)
                         break
                     case 'widget-1':
                         var tempvar=[]
