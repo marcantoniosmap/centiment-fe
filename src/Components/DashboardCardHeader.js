@@ -3,12 +3,15 @@ import { CloseButton } from "react-bootstrap"
 import { useAuth } from "../AuthContext"
 import { useDashboard } from "../DashboardContext"
 import widgetLibrary from "../widgetLibrary"
+import ModalChangeTimeframe from "./ModalChangeTimeframe"
 import ModalCoinInfo from "./ModalCoinInfo"
 
 export default function DashboardCardHeader({chartId,chartTitle,loc}){
 
     const [showSetting,setShowSetting]=useState(false)
     const [showInfo,setShowInfo]=useState(false)
+    const [showSetTimeframe,setShowSetTimeframe]=useState(false)
+
 
     const {isAuthenticated,setLoginModalFunc}=useAuth()
     const {deleteWidget,setModal,refreshWidget,activeCoin}=useDashboard()
@@ -39,7 +42,7 @@ export default function DashboardCardHeader({chartId,chartTitle,loc}){
     }
     function handleChangeTimeframe(){
         if (isAuthenticated){
-           console.log('nothing to see')
+           setShowSetTimeframe(true)
         }else{
             setLoginModalFunc(true)
         }
@@ -51,6 +54,10 @@ export default function DashboardCardHeader({chartId,chartTitle,loc}){
         }else{
             setLoginModalFunc(true)
         }
+    }
+    function handleChangeTimeframeModal(timeframe){
+        refreshWidget(chartId,activeCoin,timeframe)
+        setShowSetTimeframe(false)
     }
 
     const libraryFunction={
@@ -86,6 +93,12 @@ export default function DashboardCardHeader({chartId,chartTitle,loc}){
                 show={showInfo}
                 onHide={()=>setShowInfo(false)}
                 chartId={chartId}
+                />
+            
+            <ModalChangeTimeframe
+                show={showSetTimeframe}
+                onHide={()=>setShowSetTimeframe(false)}
+                submitFunc={handleChangeTimeframeModal}
                 />
                 <div className={`settingpopup ${showSetting ? 'helo':'d-none'}`} >
                     <div className="d-flex flex-column justify-content-between h-100">

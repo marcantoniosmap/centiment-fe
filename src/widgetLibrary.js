@@ -14,7 +14,7 @@ var widgetLibrary={
     'coinInfo':{
         id:'coinInfo',
         title:'Coin Information',
-        activities:['Refresh Data','Change Timeframe','Information'],
+        activities:['Refresh Data','Information'],
         simpleExplanation:'shows basic information of coin, including tweet counts and sentiment score',
         completeExplanation:<>
             <p>Coin Information gives a brief summary of the chosen coin, its price, volume, sentiment score, and tweet volume.</p>
@@ -97,7 +97,7 @@ var widgetLibrary={
     'widget-6':{
         id:'widget-6',
         title:'Twitter Fear and Greed Index',
-        activities:['Refresh Data','Change Timeframe','Change Widget','Delete Widget','Information'],
+        activities:['Refresh Data','Change Widget','Delete Widget','Information'],
         simpleExplanation:'visualize a sentiment score index in a given time period',
         completeExplanation:<>
             <p>TTwitter Fear and Greed Index is a customizable widget, which means user can activate it on demand.</p>

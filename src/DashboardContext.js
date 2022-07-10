@@ -221,15 +221,15 @@ export function DashboardProvider({children}){
         'Dogecoin':'DOGE',
     }
 
-    async function refreshWidget(widgetType,coin){
+    async function refreshWidget(widgetType,coin,timeframe='1d'){
         if (widgetType==='none') return 0
         if (coin===null || coin===undefined){ 
             console.log('undf')
             coin='Bitcoin'
         }
         try{
-            console.log('widget:',widgetTypeLibrary[widgetType])
-            const fetchAPI= await fetch(`${domain_amar}/${widgetTypeLibrary[widgetType]}?relative_time=1d&ticker=${coinTickerLibrary[coin]}`)
+            console.log('timeframe',timeframe)
+            const fetchAPI= await fetch(`${domain_amar}/${widgetTypeLibrary[widgetType]}?relative_time=${timeframe}&ticker=${coinTickerLibrary[coin]}`)
             const fetchResult = await fetchAPI.json();
             // console.log(fetchResult)
             if (fetchResult){
