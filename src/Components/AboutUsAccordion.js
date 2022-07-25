@@ -24,6 +24,10 @@ export default function AboutUsAccordion(){
         {
             question: 'How does the Alert work?',
             content:<>Our alert is a simple to use service that only takes a few parameter. Once there is a data update on the backend, our system will recognize that it matches with the condition set and send you <b>an email</b> containing the detail of the alert you made. </>
+        },
+        {
+            question: 'Can you finish it on time?',
+            content:<>A question asked by Mr Jude, and yes with my supervisor and teammate help, I have <b>succefully carried out</b> this project based on the scope promised on the predefense presentation. </>
         }
         
     ]
